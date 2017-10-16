@@ -2,12 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: notnoopci/php:7.1.5-browsers
+      - image: circleci/php:7.1.8-browsers
     working_directory: ~/laravel
     steps:
       - checkout
       - run: sudo apt install -y libsqlite3-dev
-      - run: composer self-update
+      - run: sudo composer self-update
       - restore_cache:
           keys:
             - composer-v1-{{ checksum "composer.json" }}
@@ -18,9 +18,8 @@ jobs:
           paths:
             - vendor
       - run: touch database/database.sqlite
-      - run: php artisan migrate --env=testing --force
+      - run: php artisan migrate --force
       - run:
           command: |
-            composer install
             ./lint.sh
             ./phpunit.sh
