@@ -78,5 +78,5 @@ After register or login, you can use internet.
 
 - PHP Framework: [Laravel 5.4](https://laravel.com/docs/5.4/)
 - Coding standard: following [PSR2](http://www.php-fig.org/psr/psr-2/). run `./lint.sh` to check.
-- Unit Test: using PHPUnit. run `./phpunit.sh`.
-- CI: using [circleci.com](https://circleci.com/)
+- Unit Test: using PHPUnit. run `./phpunit.sh`
+- CI: [![CircleCI](https://circleci.com/gh/sinkcup/wifidog-auth-laravel.svg?style=svg)](https://circleci.com/gh/sinkcup/wifidog-auth-laravel)
