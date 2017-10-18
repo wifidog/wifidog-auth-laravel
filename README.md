@@ -22,10 +22,11 @@ sudo chmod 777 bootstrap/cache
 sudo chmod -R 777 storage
 touch database/database.sqlite
 chmod 777 database
-chmod 777 database/database.sqlite
+chmod 666 database/database.sqlite
 php artisan key:generate
 php artisan jwt:generate
 php artisan migrate
+sudo ln -s `pwd` /var/www/
 sudo cp apache2/sites-enabled/* /etc/apache2/sites-enabled/
 sudo service apache2 restart
 echo "127.0.0.1 wifidog-auth.lan" | sudo tee -a /etc/hosts
@@ -47,6 +48,8 @@ DB_PASSWORD=1
 ## Wifidog Config
 
 If you want to use local computer as web server and your phone for auth test, you should login into your openwrt router, then add computer IP to `/etc/hosts`, and change `/etc/wifidog.conf`.
+
+If your web server IP is 192.168.1.132, and your openwrt router IP is 192.168.1.1, operate like this:
 
 ```
 ssh root@192.168.1.1
