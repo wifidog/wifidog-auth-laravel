@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/messages', 'MessageController@index');
 Route::get('/portal', 'PortalController@index');
+Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
