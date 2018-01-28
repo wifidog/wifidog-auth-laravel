@@ -4,6 +4,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            @if (in_array('facebook', $social_login_providers))
+            <div class="panel panel-default">
+                <div class="panel-heading">Social Login</div>
+                <div class="panel-body">
+                    <a class="btn btn-primary" href="/login/facebook" role="button">Continue with Facebook</a>
+                    <img src="http://www.facebook.com/favicon.ico" />
+                    <img src="http://m.facebook.com/favicon.ico" />
+                    <img src="http://static.xx.fbcdn.net/favicon.ico" />
+                </div>
+            </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">

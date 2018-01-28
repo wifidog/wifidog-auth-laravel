@@ -67,15 +67,26 @@ AuthServer {
 
 ```
 /etc/init.d/wifidog restart
-sleep 3
+sleep 10
 /etc/init.d/wifidog status
 ```
 
 Now take out your phone, connect the openwrt wifi, when you try to visit any http website, you will see this login page:
 
-![phone screenshot of wifidog auth](https://user-images.githubusercontent.com/4971414/28500276-fb0293ae-6f8a-11e7-8033-73bea808d6d9.png)
+![phone screenshot of wifidog auth](https://user-images.githubusercontent.com/4971414/35483355-d5079ae2-047b-11e8-8e5a-eb79bf4ca205.png)
 
 After register or login, you can use internet.
+
+### Social Login
+
+If you want to use Facebook Login, add these to `.env`
+
+```
+FACEBOOK_APP_ID=xxx
+FACEBOOK_APP_SECRET=xxx
+FACEBOOK_OAUTH_REDIRECT_URI="http://wifidog-auth.lan/login/facebook/callback"
+SOCIAL_LOGIN_PROVIDERS="facebook"
+```
 
 ## Tech
 
