@@ -90,6 +90,10 @@ class LoginController extends Controller
             $context = [
                 'method' => __METHOD__,
                 'driver' => $driver,
+                'exception' => [
+                    'name' => get_class($e),
+                    'code' => $e->getCode(),
+                ],
             ];
             if ($e->hasResponse()) {
                 $body = $e->getResponse()->getBody();
@@ -98,9 +102,14 @@ class LoginController extends Controller
             Log::warning('Socialite Login failed', $context);
             return redirect()->to('/login');
         } catch (\Exception $e) {
-            Log::warning('Socialite Login failed: ' . $e->getMessage(), [
+            Log::warning('Socialite Login failed', [
                 'method' => __METHOD__,
                 'driver' => $driver,
+                'exception' => [
+                    'name' => get_class($e),
+                    'message' => $e->getMessage(),
+                    'code' => $e->getCode(),
+                ],
             ]);
             return redirect()->to('/login');
         }
@@ -113,7 +122,7 @@ class LoginController extends Controller
             $user = $social_user->user;
         } else {
             $user = User::firstOrCreate([
-                'email' => $driver . $remote_user->getId() . '@example.com', // faker for email unique in db
+                'email' => $driver . '.' . $remote_user->getId() . '@example.com', // faker for email unique in db
                 'name' => $remote_user->getName(),
             ]);
             $social_user->user()->associate($user);

@@ -49,11 +49,11 @@ DB_PASSWORD=1
 
 If you want to use local computer as web server and your phone for auth test, you should login into your openwrt router, then add computer IP to `/etc/hosts`, and change `/etc/wifidog.conf`.
 
-If your web server IP is 192.168.1.132, and your openwrt router IP is 192.168.1.1, operate like this:
+If your web server IP is 192.168.1.42, mac is 00:00:DE:AD:BE:AF, and your openwrt router IP is 192.168.1.1, operate like this:
 
 ```
 ssh root@192.168.1.1
-echo "192.168.1.132 wifidog-auth" >> /etc/hosts
+echo "192.168.1.42 wifidog-auth" >> /etc/hosts
 /etc/init.d/dnsmasq restart
 vi /etc/wifidog.conf
 ```
@@ -63,6 +63,7 @@ AuthServer {
     Hostname wifidog-auth.lan
     Path /
 }
+TrustedMACList 00:00:DE:AD:BE:AF
 ```
 
 ```
@@ -86,6 +87,20 @@ FACEBOOK_APP_ID=xxx
 FACEBOOK_APP_SECRET=xxx
 FACEBOOK_OAUTH_REDIRECT_URI="http://wifidog-auth.lan/login/facebook/callback"
 SOCIAL_LOGIN_PROVIDERS="facebook"
+```
+
+then add these to router's `/etc/wifidog.conf`
+
+```
+FirewallRuleSet global {
+    FirewallRule allow tcp to www.facebook.com
+    FirewallRule allow tcp to m.facebook.com
+    FirewallRule allow tcp to static.xx.fbcdn.net
+}
+```
+
+```
+/etc/init.d/wifidog restart
 ```
 
 ## Tech
