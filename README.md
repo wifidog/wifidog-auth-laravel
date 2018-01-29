@@ -49,7 +49,7 @@ DB_PASSWORD=1
 
 If you want to use local computer as web server and your phone for auth test, you should login into your openwrt router, then add computer IP to `/etc/hosts`, and change `/etc/wifidog.conf`.
 
-If your web server IP is 192.168.1.132, and your openwrt router IP is 192.168.1.1, operate like this:
+If your web server IP is 192.168.1.132, mac is 00:00:DE:AD:BE:AF, and your openwrt router IP is 192.168.1.1, operate like this:
 
 ```
 ssh root@192.168.1.1
@@ -63,6 +63,7 @@ AuthServer {
     Hostname wifidog-auth.lan
     Path /
 }
+TrustedMACList 00:00:DE:AD:BE:AF
 ```
 
 ```
