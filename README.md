@@ -88,6 +88,20 @@ FACEBOOK_OAUTH_REDIRECT_URI="http://wifidog-auth.lan/login/facebook/callback"
 SOCIAL_LOGIN_PROVIDERS="facebook"
 ```
 
+then add these to router's `/etc/wifidog.conf`
+
+```
+FirewallRuleSet global {
+    FirewallRule allow tcp to www.facebook.com
+    FirewallRule allow tcp to m.facebook.com
+    FirewallRule allow tcp to static.xx.fbcdn.net
+}
+```
+
+```
+/etc/init.d/wifidog restart
+```
+
 ## Tech
 
 - PHP Framework: [Laravel 5.4](https://laravel.com/docs/5.4/)
