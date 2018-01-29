@@ -185,6 +185,7 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Eusonlito\LaravelMeta\MetaServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
