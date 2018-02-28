@@ -89,7 +89,27 @@ FACEBOOK_OAUTH_REDIRECT_URI="http://wifidog-auth.lan/login/facebook/callback"
 SOCIAL_LOGIN_PROVIDERS="facebook"
 ```
 
-then add these to router's `/etc/wifidog.conf`
+then change ipset of router:
+
+```
+ssh root@192.168.1.1
+opkg update
+opkg install dnsmasq-full
+echo "ipset create facebook hash:ip" >> /etc/firewall.user
+echo "ipset=/facebook.com/fbcdn.net/facebook" >> /etc/dnsmasq.conf
+fw3 reload
+/etc/init.d/dnsmasq restart
+```
+
+Add this to `/etc/wifidog.conf`
+
+```
+FirewallRuleSet unknown-users {
+    FirewallRule allow to-ipset facebook
+}
+```
+
+If your router doesn't support ipset, can only add these to `/etc/wifidog.conf`, but this way can not guarantee the reliability.
 
 ```
 FirewallRuleSet global {
