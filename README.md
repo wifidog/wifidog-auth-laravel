@@ -1,4 +1,4 @@
-# Wifidog Auth (Laravel 5.4)
+# Wifidog Auth (Laravel 5.6)
 
 This project provides a auth server for wifidog. For API details, please see the [WiFiDog Protocol V1](http://dev.wifidog.org/wiki/doc/developer/WiFiDogProtocol_V1).
 
@@ -125,7 +125,7 @@ FirewallRuleSet global {
 
 ## Tech
 
-- PHP Framework: [Laravel 5.4](https://laravel.com/docs/5.4/)
+- PHP Framework: [Laravel 5.6](https://laravel.com/docs/5.6/)
 - Coding standard: following [PSR2](http://www.php-fig.org/psr/psr-2/). run `./lint.sh` to check.
 - Unit Test: using PHPUnit. run `./phpunit.sh`
-- CI: [![CircleCI](https://circleci.com/gh/sinkcup/wifidog-auth-laravel.svg?style=svg)](https://circleci.com/gh/sinkcup/wifidog-auth-laravel)
+- CI: [![CircleCI](https://circleci.com/gh/wifidog/wifidog-auth-laravel.svg?style=svg)](https://circleci.com/gh/wifidog/wifidog-auth-laravel)

@@ -35,4 +35,9 @@
   <exclude-pattern>/resources/views/</exclude-pattern>
  </rule>
 
+ <!-- ignore WARNING: A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute logic with side effects, but should not do both. The first symbol is defined on line 10 and the first side effect is on line 24. -->
+ <rule ref="PSR1.Files.SideEffects">
+  <exclude-pattern>/public/index.php</exclude-pattern>
+ </rule>
+
 </ruleset>

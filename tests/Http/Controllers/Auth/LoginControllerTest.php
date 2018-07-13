@@ -6,7 +6,6 @@ use App\SocialUser;
 use Mockery;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-;
 use App\User;
 use Meta;
 use Socialite;
