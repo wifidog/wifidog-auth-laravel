@@ -14,7 +14,7 @@ class ResponseMacroServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Response::macro('txt', function ($value, $status) {
+        Response::macro('txt', function ($value, $status = 200) {
             return Response::make($value, $status)->header('Content-Type', 'text/plain');
         });
     }

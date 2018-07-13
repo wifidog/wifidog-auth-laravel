@@ -45,6 +45,6 @@ class GatewayController extends Controller
                 $r = 'Error: not allow unknown gateway';
             }
         }
-        return response($r, 200)->header('Content-Type', 'text/plain');
+        return response()->txt($r);
     }
 }
