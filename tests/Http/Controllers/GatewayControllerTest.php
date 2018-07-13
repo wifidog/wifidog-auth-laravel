@@ -4,7 +4,6 @@ namespace Tests\Http\Controllers;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-;
 use App\Gateway;
 
 class GatewayControllerTest extends TestCase
