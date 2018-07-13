@@ -3,14 +3,14 @@
 namespace Tests\Http\Controllers;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+;
 use App\User;
 use Meta;
 
 class AuthControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
     
     public function testAuthLostParams()
     {

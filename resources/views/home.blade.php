@@ -2,15 +2,18 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ __('dashboard') }}</div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('dashboard') }}</div>
 
-                <div class="panel-body">
-                    <div class="alert alert-info">
-                        <p>{{ __($msg) }}</p>
-                    </div>
+                <div class="card-body">
+                    @if (!empty($msg))
+                        <div class="alert alert-info" role="alert">
+                            {{ __($msg) }}
+                        </div>
+                    @endif
+
                     @if (!empty($wifidog_uri))
                     <a class="btn btn-success" href={{ $wifidog_uri }}>start internet</a>
                     @endif

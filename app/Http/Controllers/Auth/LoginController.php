@@ -48,7 +48,7 @@ class LoginController extends Controller
         if (!empty($data)) {
             session($data);
         }
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest')->except('logout');
     }
 
     public function redirectTo()

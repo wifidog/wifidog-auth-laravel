@@ -5,15 +5,15 @@ namespace Tests\Http\Controllers\Auth;
 use App\SocialUser;
 use Mockery;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+;
 use App\User;
 use Meta;
 use Socialite;
 
 class LoginControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
     
     public function testHandleProviderCallbackFailedWithInvalidState()
     {
