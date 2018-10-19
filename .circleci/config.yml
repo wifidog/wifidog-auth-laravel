@@ -30,8 +30,8 @@ jobs: # a collection of steps
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: touch storage/testing.sqlite 
-      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: touch database/database.sqlite
+      - run: php artisan migrate
       - run:
           command: |
             ./lint.sh
