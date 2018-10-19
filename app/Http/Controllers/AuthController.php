@@ -42,7 +42,7 @@ class AuthController extends Controller
                 $user = JWTAuth::parseToken()->authenticate();
                 $user_status = 1;
                 $status = 200;
-                Log::debug('JWTAuth success', ['user' => $user]);
+                Log::debug('JWTAuth success', ['user' => $user->toArray()]);
             } catch (\Exception $e) {
                 $user_status = 0;
                 $status = 401;

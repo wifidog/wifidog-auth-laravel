@@ -12,8 +12,8 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
                 height: 100vh;
                 margin: 0;
             }
@@ -65,7 +65,6 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}" />
         <link rel="manifest" href="{{ asset('manifest.json') }}" />
         <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#5bbad5">
-        <meta name="theme-color" content="#ffffff">
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -87,7 +86,7 @@
 
                 <div class="links">
                     <a href="http://dev.wifidog.org/wiki/doc/developer/WiFiDogProtocol_V1">Documentation</a>
-                    <a href="https://github.com/sinkcup/wifidog-auth-laravel">GitHub</a>
+                    <a href="https://github.com/wifidog/wifidog-auth-laravel">GitHub</a>
                 </div>
             </div>
         </div>
