@@ -45,6 +45,25 @@ DB_USERNAME=root
 DB_PASSWORD=1
 ```
 
+### Docker
+
+```
+docker build -t="wifidog/wifidog-auth-laravel:master" .
+docker run  \
+    --env APP_NAME="Wifidog Auth" \
+    --env APP_ENV=local \
+    --env APP_KEY=base64:silhtn4zkyodaaDIRSU0QEqq4CwKfjdzLqZectaHIi8= \
+    --env DB_CONNECTION=mysql \
+    --env DB_HOST=172.17.0.1 \
+    --env DB_PORT=3306 \
+    --env DB_DATABASE=wifidog \
+    --env DB_USERNAME=root \
+    --env DB_PASSWORD=1 \
+    -t "wifidog/wifidog-auth-laravel-forked:master"
+sudo sed -i "/wifidog-auth.lan/d" /etc/hosts
+echo "172.17.0.2 wifidog-auth.lan" | sudo tee -a /etc/hosts
+```
+
 ## Wifidog Config
 
 If you want to use local computer as web server and your phone for auth test, you should login into your openwrt router, then add computer IP to `/etc/hosts`, and change `/etc/wifidog.conf`.
