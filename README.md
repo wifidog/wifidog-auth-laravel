@@ -1,4 +1,4 @@
-# Wifidog Auth (Laravel 5.7)
+# Wifidog Auth (Laravel 5.8)
 
 This project provides a auth server for wifidog. For API details, please see the [WiFiDog Protocol V1](http://dev.wifidog.org/wiki/doc/developer/WiFiDogProtocol_V1).
 
@@ -26,6 +26,10 @@ chmod 666 database/database.sqlite
 php artisan key:generate
 php artisan jwt:generate
 php artisan migrate
+./phpunit.sh
+
+npm install
+npm run dev
 sudo ln -s `pwd` /var/www/
 sudo cp apache2/sites-enabled/* /etc/apache2/sites-enabled/
 sudo service apache2 restart
