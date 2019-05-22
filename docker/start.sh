@@ -6,28 +6,35 @@ role=${CONTAINER_ROLE:-app}
 env=${APP_ENV:-production}
 
 cd /var/www/laravel
-php artisan migrate
+php artisan migrate --force
+rm -f public/storage
+php artisan vendor:publish --all
 
 if [ "$env" != "local" ]; then
     echo "Caching configuration..."
-    (php artisan config:cache && php artisan view:cache)
+    php artisan config:cache
+    php artisan view:cache
+    php artisan route:cache
 fi
 
-if [ "$role" = "app" ]; then
+if [[ "$role" = "app" ]]; then
 
     exec apache2-foreground
 
-elif [ "$role" = "queue" ]; then
+elif [[ "$role" = "scheduler" ]]; then
 
-    echo "Queue role"
-    exit 1
+    echo "start cron"
+    mkdir -p /var/spool/cron/crontabs/
+    cp crontab /var/spool/cron/crontabs/root
+    chmod 0644 /var/spool/cron/crontabs/root
+    crontab /var/spool/cron/crontabs/root
+    cron -f
 
-elif [ "$role" = "scheduler" ]; then
+elif [[ "$role" = "queue" ]]; then
 
-    echo "Scheduler role"
-    exit 1
+    echo "Running the queue..."
+    php artisan queue:work --queue={default} --verbose --tries=3 --timeout=90
 
 else
-    echo "Could not match the container role \"$role\""
-    exit 1
+    tail -f /var/log/faillog
 fi
