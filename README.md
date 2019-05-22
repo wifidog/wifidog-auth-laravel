@@ -33,9 +33,8 @@ npm run dev
 sudo ln -s `pwd` /var/www/
 sudo cp apache2/sites-enabled/* /etc/apache2/sites-enabled/
 sudo service apache2 restart
-echo "127.0.0.1 wifidog-auth.lan" | sudo tee -a /etc/hosts
-curl 'http://wifidog-auth.lan/ping?gw_id=001217DA42D2&sys_uptime=742725&sys_memfree=2604&sys_load=0.03&wifidog_uptime=3861'
-google-chrome http://wifidog-auth.lan/
+curl 'http://wifidog-auth.localhost/ping?gw_id=001217DA42D2&sys_uptime=742725&sys_memfree=2604&sys_load=0.03&wifidog_uptime=3861'
+google-chrome http://wifidog-auth.localhost/
 ```
 
 If you want to use MySQL, change `.env` like this\(don't forget to [migrate](https://laravel.com/docs/5.4/migrations#running-migrations) again\):
@@ -53,7 +52,7 @@ DB_PASSWORD=1
 
 ```
 docker build -t="wifidog/wifidog-auth-laravel:master" .
-docker run  \
+docker run --rm \
     --env APP_NAME="Wifidog Auth" \
     --env APP_ENV=local \
     --env APP_KEY=base64:silhtn4zkyodaaDIRSU0QEqq4CwKfjdzLqZectaHIi8= \
@@ -64,8 +63,6 @@ docker run  \
     --env DB_USERNAME=root \
     --env DB_PASSWORD=1 \
     -t "wifidog/wifidog-auth-laravel-forked:master"
-sudo sed -i "/wifidog-auth.lan/d" /etc/hosts
-echo "172.17.0.2 wifidog-auth.lan" | sudo tee -a /etc/hosts
 ```
 
 ## Wifidog Config
