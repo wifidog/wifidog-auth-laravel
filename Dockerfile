@@ -48,9 +48,6 @@ RUN sed -i 's/\/var\/www\/.*\/public/\/var\/www\/laravel\/public/g' /etc/apache2
 COPY . /var/www/laravel/
 RUN chown www-data:www-data bootstrap/cache \
     && chown -R www-data:www-data storage/
-RUN if [ -n "$(ls patches/)" ]; then for i in patches/*.patch; do patch -N -p0 -i $i || true; done; fi
-RUN phpdoc run -d app/Http/Controllers/API -t public/docs \
-    && find public/docs/ -name '*.php.txt' | xargs rm -f
 
 COPY docker/start.sh /usr/local/bin/start
 RUN chmod +x /usr/local/bin/start
