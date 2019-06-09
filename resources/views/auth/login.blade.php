@@ -4,18 +4,39 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if (in_array('facebook', $social_login_providers))
             <div class="card">
                 <div class="card-header">{{ __('Social Login') }}</div>
 
-                <div class="card-body">
-                    <a class="btn btn-primary" href="/login/facebook" role="button">Continue with Facebook</a>
-                    <img src="http://www.facebook.com/favicon.ico" />
-                    <img src="http://m.facebook.com/favicon.ico" />
-                    <img src="http://static.xx.fbcdn.net/favicon.ico" />
+                <div class="card-body text-center">
+                    @if (in_array('wechat_web', $social_login_providers))
+                        <script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+                        <div class="card-text" id="login_container"></div>
+                        <script>
+                            var obj = new WxLogin({
+                                self_redirect: false,
+                                id: "login_container",
+                                appid: "{{ config('services.wechat_web.client_id') }}",
+                                scope: "snsapi_login",
+                                redirect_uri: "{{ config('services.wechat_web.redirect') }}",
+                                state: "{{ csrf_token() }}",
+                                style: "",
+                                href: ""
+                            });
+                        </script>
+                        @php
+                            unset($social_login_providers[array_search('wechat_web', $social_login_providers)]);
+                        @endphp
+                    @endif
+
+                    <ul class="nav justify-content-center">
+                        @foreach ($social_login_providers as $provider)
+                            <li class="nav-item mr-2">
+                                <a class="nav-link btn {{ $errors->has($provider) ? 'btn-danger' : 'btn-primary' }}" href="/login/{{ strtolower(str_replace('_', '-', $provider)) }}" role="button">{{ __($provider) }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
-            @endif
 
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
@@ -70,16 +91,11 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <a class="btn btn-link" href="{{ route('register') }}">
-                                    Have no Account? Click here to Register
-                                </a>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>

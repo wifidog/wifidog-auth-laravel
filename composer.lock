@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48bfbc152ec979922796a0217578e505",
+    "content-hash": "be2bc5dafc592d57caf15e7b9dbd8aaa",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1931,6 +1931,52 @@
             "time": "2018-07-02T15:55:56+00:00"
         },
         {
+            "name": "phlak/semver",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHLAK/SemVer.git",
+                "reference": "76932b6571d570b2790a439d195acd232bf4d40a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHLAK/SemVer/zipball/76932b6571d570b2790a439d195acd232bf4d40a",
+                "reference": "76932b6571d570b2790a439d195acd232bf4d40a",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.3",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHLAK\\SemVer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Kankiewicz",
+                    "email": "Chris@ChrisKankiewicz.com"
+                }
+            ],
+            "description": "Semantic versioning helper library",
+            "time": "2017-09-07T23:53:52+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.5.0",
             "source": {
@@ -2417,6 +2463,58 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sinkcup/laravel-make-auth-socialite",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sinkcup/laravel-make-auth-socialite.git",
+                "reference": "3a5cdfd504926b825b6b0e14ca8abbbd4565801c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sinkcup/laravel-make-auth-socialite/zipball/3a5cdfd504926b825b6b0e14ca8abbbd4565801c",
+                "reference": "3a5cdfd504926b825b6b0e14ca8abbbd4565801c",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "doctrine/dbal": "^2.9",
+                "laravel/framework": "~5.5.0|~5.8.0|~5.9.0",
+                "laravel/socialite": "~3.3.0|~4.1.0",
+                "phlak/semver": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "sinkcup\\LaravelMakeAuthSocialite\\PackageServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "sinkcup\\LaravelMakeAuthSocialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sink cup",
+                    "email": "sinkcup@gmail.com"
+                }
+            ],
+            "description": "Automatically generate database, pages, and routes for Laravel Socialite",
+            "time": "2019-06-09T03:33:49+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

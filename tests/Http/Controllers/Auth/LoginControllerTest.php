@@ -2,12 +2,11 @@
 
 namespace Tests\Http\Controllers\Auth;
 
-use App\SocialUser;
 use Mockery;
+use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
-use Meta;
 use Socialite;
 
 class LoginControllerTest extends TestCase
@@ -32,11 +31,20 @@ class LoginControllerTest extends TestCase
         $user_name = $this->faker->name;
         $abstract_user->shouldReceive('getId')
             ->andReturn($provider_user_id)
+            ->shouldReceive('getNickname')
+            ->andReturn($user_name)
+            ->shouldReceive('getEmail')
+            ->andReturn(null)
+            ->shouldReceive('getRaw')
+            ->andReturn(null)
+            ->shouldReceive('getAvatar')
+            ->andReturn($user_name)
             ->shouldReceive('getName')
             ->andReturn($user_name);
 
         $provider = Mockery::mock('Laravel\Socialite\Contracts\Provider');
         $provider->shouldReceive('user')->andReturn($abstract_user);
+        $provider->shouldReceive('scopes')->andReturn($provider);
 
         $driver = 'facebook';
         Socialite::shouldReceive('driver')->with($driver)->andReturn($provider);
@@ -46,7 +54,7 @@ class LoginControllerTest extends TestCase
         $response = $this->call('GET', "/login/$driver/callback", $params);
         $response->assertRedirect('/home');
 
-        $result = SocialUser::where('provider', $driver)->where('provider_user_id', $provider_user_id)->get();
+        $result = SocialAccount::where('provider', $driver)->where('provider_user_id', $provider_user_id)->get();
         $this->assertEquals(1, count($result));
         $social_user_in_db = $result[0];
 
