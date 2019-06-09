@@ -37,11 +37,12 @@ npm run dev
 sudo ln -s `pwd` /var/www/
 sudo ln -s `realpath config/apache2/sites-available/laravel.conf` /etc/apache2/sites-available/
 sudo a2ensite laravel && sudo service apache2 restart
-curl 'http://wifidog-auth.localhost/ping?gw_id=001217DA42D2&sys_uptime=742725&sys_memfree=2604&sys_load=0.03&wifidog_uptime=3861'
-google-chrome http://wifidog-auth.localhost/
+echo '127.0.0.1 wifidog-auth.lan' | sudo tee -a /etc/hosts
+curl 'http://wifidog-auth.lan/ping?gw_id=001217DA42D2&sys_uptime=742725&sys_memfree=2604&sys_load=0.03&wifidog_uptime=3861'
+google-chrome http://wifidog-auth.lan/
 ```
 
-If you want to use MySQL, change `.env` like this\(don't forget to [migrate](https://laravel.com/docs/5.4/migrations#running-migrations) again\):
+If you want to use MySQL, change `.env` like this\(don't forget to [migrate](https://laravel.com/docs/migrations#running-migrations) again\):
 
 ```
 DB_CONNECTION=mysql
@@ -66,7 +67,7 @@ docker run --rm \
     --env DB_DATABASE=wifidog \
     --env DB_USERNAME=root \
     --env DB_PASSWORD=1 \
-    -t "wifidog/wifidog-auth-laravel"
+    -it "wifidog/wifidog-auth-laravel"
 ```
 
 ## Wifidog Config
@@ -104,13 +105,13 @@ After register or login, you can use internet.
 
 ### Social Login
 
-If you want to use Facebook Login, add these to `.env`
+If you want to use Facebook Login\([more providers are here](https://github.com/sinkcup/laravel-make-auth-socialite)\), add these to `.env`
 
 ```
-FACEBOOK_APP_ID=xxx
-FACEBOOK_APP_SECRET=xxx
-FACEBOOK_OAUTH_REDIRECT_URI="http://wifidog-auth.lan/login/facebook/callback"
-SOCIAL_LOGIN_PROVIDERS="facebook"
+FACEBOOK_APP_ID=123456
+FACEBOOK_APP_SECRET=secret
+FACEBOOK_VALID_OAUTH_REDIRECT_URI="http://wifidog-auth.lan/login/facebook/callback"
+AUTH_SOCIAL_LOGIN_PROVIDERS="Facebook"
 ```
 
 then change ipset of router:
@@ -146,6 +147,13 @@ FirewallRuleSet global {
 ```
 /etc/init.d/wifidog restart
 ```
+
+## Debug
+
+If you have problems, try these methods:
+
+1. debug auth server: check the access log and error log, they are usually in `/var/log/apache2/`
+2. debug wifidog: edit `/usr/bin/wifidog-init`, change "start" section's "wifidog $OPTIONS" to "wifidog -f -d 9"
 
 ## Tech
 
