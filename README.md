@@ -1,5 +1,6 @@
 # Wifidog Auth (Laravel 5.8)
 
+[![CircleCI](https://circleci.com/gh/wifidog/wifidog-auth-laravel.svg?style=svg)](https://circleci.com/gh/wifidog/wifidog-auth-laravel)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/wifidog/wifidog-auth-laravel.svg)](https://cloud.docker.com/u/wifidog/repository/docker/wifidog/wifidog-auth-laravel)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/wifidog/wifidog-auth-laravel/blob/master/LICENSE)
 
@@ -150,4 +151,3 @@ FirewallRuleSet global {
 - PHP Framework: [Laravel](https://laravel.com/)
 - Coding standard: following [PSR-2](http://www.php-fig.org/psr/psr-2/). run `./lint.sh` to check.
 - Unit Test: using PHPUnit. run `./phpunit.sh`
-- CI: [![CircleCI](https://circleci.com/gh/wifidog/wifidog-auth-laravel.svg?style=svg)](https://circleci.com/gh/wifidog/wifidog-auth-laravel)
