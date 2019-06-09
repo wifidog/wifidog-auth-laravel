@@ -98,7 +98,7 @@ sleep 10
 
 Now take out your phone, connect the openwrt wifi, when you try to visit any http website, you will see this login page:
 
-![phone screenshot of wifidog auth](https://user-images.githubusercontent.com/4971414/35483355-d5079ae2-047b-11e8-8e5a-eb79bf4ca205.png)
+![phone screenshot of wifidog auth](https://user-images.githubusercontent.com/4971414/59157860-c1328180-8ae4-11e9-9325-51269f3c6c76.png)
 
 After register or login, you can use internet.
 
