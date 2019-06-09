@@ -1,5 +1,7 @@
 # Wifidog Auth (Laravel 5.8)
 
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/wifidog/wifidog-auth-laravel/blob/master/LICENSE)
+
 This project provides a auth server for wifidog. For API details, please see the [WiFiDog Protocol V1](http://dev.wifidog.org/wiki/doc/developer/WiFiDogProtocol_V1).
 
 ## Pages
