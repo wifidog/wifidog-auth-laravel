@@ -1,5 +1,6 @@
 # Wifidog Auth (Laravel 5.8)
 
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/wifidog/wifidog-auth-laravel.svg)](https://cloud.docker.com/u/wifidog/repository/docker/wifidog/wifidog-auth-laravel)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/wifidog/wifidog-auth-laravel/blob/master/LICENSE)
 
 This project provides a auth server for wifidog. For API details, please see the [WiFiDog Protocol V1](http://dev.wifidog.org/wiki/doc/developer/WiFiDogProtocol_V1).
@@ -53,7 +54,6 @@ DB_PASSWORD=1
 ### Docker
 
 ```
-docker build -t="wifidog/wifidog-auth-laravel:master" .
 docker run --rm \
     --env APP_NAME="Wifidog Auth" \
     --env APP_ENV=local \
@@ -64,7 +64,7 @@ docker run --rm \
     --env DB_DATABASE=wifidog \
     --env DB_USERNAME=root \
     --env DB_PASSWORD=1 \
-    -t "wifidog/wifidog-auth-laravel-forked:master"
+    -t "wifidog/wifidog-auth-laravel"
 ```
 
 ## Wifidog Config
