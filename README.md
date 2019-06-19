@@ -28,7 +28,7 @@ touch database/database.sqlite
 chmod 777 database
 chmod 666 database/database.sqlite
 php artisan key:generate
-php artisan jwt:generate
+php artisan jwt:secret
 php artisan migrate
 ./phpunit.sh
 
