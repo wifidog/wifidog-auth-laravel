@@ -36,3 +36,4 @@ jobs: # a collection of steps
           command: |
             ./lint.sh
             ./phpunit.sh
+            bash <(curl -s https://codecov.io/bash)
