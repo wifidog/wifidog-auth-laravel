@@ -10,6 +10,7 @@
 /.vagrant
 Homestead.json
 Homestead.yaml
+clover.xml
 npm-debug.log
 yarn-error.log
 .env
