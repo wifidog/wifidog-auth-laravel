@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Http\Controllers\Auth;
+namespace Tests\Feature;
 
 use Mockery;
 use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
