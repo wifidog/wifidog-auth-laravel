@@ -3,17 +3,10 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Faker;
+use Illuminate\Foundation\Testing\WithFaker;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
-
-    protected $faker;
-
-    protected function setUp(): void
-    {
-        $this->faker = Faker\Factory::create();
-        parent::setUp();
-    }
+    use WithFaker;
 }
