@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 STARTED_AT=$(date +%s)
 
-php artisan migrate:fresh
-php artisan migrate:refresh
+php artisan migrate
 if [ $? -ne 0 ]; then
     exit 1
 fi
