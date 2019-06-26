@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(config('auth.options'));
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/messages', 'MessageController@index');

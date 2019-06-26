@@ -4,11 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if ($social_login['enabled'])
             <div class="card">
                 <div class="card-header">{{ __('Social Login') }}</div>
 
                 <div class="card-body text-center">
-                    @if (in_array('wechat_web', $social_login_providers))
+                    @if (in_array('wechat_web', $social_login['providers']))
                         <script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
                         <div class="card-text" id="login_container"></div>
                         <script>
@@ -24,12 +25,12 @@
                             });
                         </script>
                         @php
-                            unset($social_login_providers[array_search('wechat_web', $social_login_providers)]);
+                            unset($social_login['providers'][array_search('wechat_web', $social_login['providers'])]);
                         @endphp
                     @endif
 
                     <ul class="nav justify-content-center">
-                        @foreach ($social_login_providers as $provider)
+                        @foreach ($social_login['providers'] as $provider)
                             <li class="nav-item mr-2">
                                 <a class="nav-link btn {{ $errors->has($provider) ? 'btn-danger' : 'btn-primary' }}" href="/login/{{ strtolower(str_replace('_', '-', $provider)) }}" role="button">{{ __($provider) }}</a>
                             </li>
@@ -37,7 +38,9 @@
                     </ul>
                 </div>
             </div>
+            @endif
 
+            @if ($password_login['enabled'])
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -101,6 +104,8 @@
                     </form>
                 </div>
             </div>
+            @endif
+
         </div>
     </div>
 </div>

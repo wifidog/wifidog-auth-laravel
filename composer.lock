@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be2bc5dafc592d57caf15e7b9dbd8aaa",
+    "content-hash": "b9d4c3ee54cb9b7d770adc97aea6fe09",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2466,16 +2466,16 @@
         },
         {
             "name": "sinkcup/laravel-make-auth-socialite",
-            "version": "4.0.1",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sinkcup/laravel-make-auth-socialite.git",
-                "reference": "3a5cdfd504926b825b6b0e14ca8abbbd4565801c"
+                "reference": "6c21d988104adcb7864d8118aedefaf2f8a37cce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sinkcup/laravel-make-auth-socialite/zipball/3a5cdfd504926b825b6b0e14ca8abbbd4565801c",
-                "reference": "3a5cdfd504926b825b6b0e14ca8abbbd4565801c",
+                "url": "https://api.github.com/repos/sinkcup/laravel-make-auth-socialite/zipball/6c21d988104adcb7864d8118aedefaf2f8a37cce",
+                "reference": "6c21d988104adcb7864d8118aedefaf2f8a37cce",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2514,7 +2514,7 @@
                 }
             ],
             "description": "Automatically generate database, pages, and routes for Laravel Socialite",
-            "time": "2019-06-09T03:33:49+00:00"
+            "time": "2019-06-26T04:18:12+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
