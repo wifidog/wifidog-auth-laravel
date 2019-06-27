@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Client as HttpClient;
-use JWTAuth;
-use Illuminate\Support\Facades\Log;
+use Log;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -26,7 +25,7 @@ class AuthController extends Controller
      */
     public function index(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'gw_id' => 'required|string',
             'token' => 'required|string',
             'stage' => 'required|string|in:login,logout,counters',
@@ -38,15 +37,16 @@ class AuthController extends Controller
         $user_status = -1;
         $status = 400;
         if (!$validator->fails()) {
-            try {
-                $user = JWTAuth::parseToken()->authenticate();
+            $this->middleware('auth:api');
+            $user = $request->user();
+            if (!empty($user)) {
                 $user_status = 1;
                 $status = 200;
-                Log::debug('JWTAuth success', ['user' => $user->toArray()]);
-            } catch (\Exception $e) {
+                Log::debug('Auth success', ['user' => $user->toArray()]);
+            } else {
                 $user_status = 0;
                 $status = 401;
-                Log::error('JWTAuth error ' . $e->getMessage());
+                Log::error('Auth error');
             }
         }
         return response()->txt('Auth: ' . $user_status, $status);
