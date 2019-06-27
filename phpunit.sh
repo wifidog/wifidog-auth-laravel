@@ -7,7 +7,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-./vendor/bin/phpunit --stop-on-defect tests/
+./vendor/bin/phpunit --stop-on-defect --coverage-text tests/
 if [ $? -ne 0 ]; then
     exit 1
 fi
