@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator;
-use Lang;
 use App\Gateway;
+use Validator;
 
 class GatewayController extends Controller
 {
@@ -33,6 +32,7 @@ class GatewayController extends Controller
         $input = $validator->getData();
         $input['id'] = $input['gw_id'];
         unset($input['gw_id']);
+        $status_code = 200;
         if (config('wifidog.allow_unknown_gateway')) {
             Gateway::updateOrCreate(['id' => $input['id']], $input);
             $r = 'Pong';
@@ -43,8 +43,9 @@ class GatewayController extends Controller
                 $r = 'Pong';
             } else {
                 $r = 'Error: not allow unknown gateway';
+                $status_code = 400;
             }
         }
-        return response()->txt($r);
+        return response()->txt($r, $status_code);
     }
 }
