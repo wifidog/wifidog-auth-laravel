@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
+use Validator;
 
 class ProfileController extends Controller
 {
@@ -41,7 +41,7 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-        $validated_data = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'email' => [
                 Rule::unique('users')->ignore($user->id),
             ],

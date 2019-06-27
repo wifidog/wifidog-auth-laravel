@@ -45,6 +45,7 @@ return [
             'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
+            'input_key' => 'token',
         ],
     ],
 

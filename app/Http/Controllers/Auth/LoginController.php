@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
-use JWTAuth;
+use Illuminate\Support\Str;
 use sinkcup\LaravelMakeAuthSocialite\Http\Controllers\SocialiteLoginController;
 
 class LoginController extends SocialiteLoginController
@@ -52,8 +51,11 @@ class LoginController extends SocialiteLoginController
     public function redirectTo()
     {
         $uri = '/home';
-        $user = Auth::user();
-        $token = JWTAuth::fromUser($user);
+        $user = auth()->user();
+        $token = Str::random(60);
+        $user->forceFill([
+            'api_token' => $token,
+        ])->save();
         if (session('gw_address') && session('gw_port')) {
             $uri = 'http://' . session('gw_address') . ':' . session('gw_port') . '/wifidog/auth?token=' . $token;
         }
