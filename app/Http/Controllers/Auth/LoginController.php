@@ -18,7 +18,6 @@ class LoginController extends SocialiteLoginController
     |
     */
 
-
     /**
      * Create a new controller instance.
      *
@@ -52,7 +51,7 @@ class LoginController extends SocialiteLoginController
     {
         $uri = '/home';
         $user = auth()->user();
-        $token = Str::random(60);
+        $token = $this->generateToken();
         $user->forceFill([
             'api_token' => $token,
         ])->save();
@@ -60,5 +59,10 @@ class LoginController extends SocialiteLoginController
             $uri = 'http://' . session('gw_address') . ':' . session('gw_port') . '/wifidog/auth?token=' . $token;
         }
         return $uri;
+    }
+
+    public function generateToken()
+    {
+        return Str::random(60);
     }
 }
