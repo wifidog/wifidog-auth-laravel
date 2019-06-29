@@ -68,8 +68,6 @@ class LoginControllerTest extends TestCase
                 'gw_port' => $gw_port,
             ])->get("/login/$driver/callback?" . http_build_query($params));
         $response->assertRedirect('http://' . $gw_address . ':' . $gw_port . '/wifidog/auth?token=' . $token);
-        //$response = $this->call('GET', "/login/$driver/callback", $params);
-        //$response->assertRedirect('/home');
 
         $result = SocialAccount::where('provider', $driver)->where('provider_user_id', $provider_user_id)->get();
         $this->assertEquals(1, count($result));
@@ -98,5 +96,13 @@ class LoginControllerTest extends TestCase
     {
         $controller = new LoginController();
         $this->assertEquals(60, strlen($controller->generateToken()));
+    }
+
+    public function testRedirectIfAuthenticated()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)
+            ->get('/login');
+        $response->assertRedirect('/home');
     }
 }
