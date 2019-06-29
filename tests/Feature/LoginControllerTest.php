@@ -50,8 +50,6 @@ class LoginControllerTest extends TestCase
         $provider->shouldReceive('scopes')->andReturn($provider);
 
         $token = Str::random(60);
-        //$login_controller = Mockery::mock('App\Http\Controllers\Auth\LoginController');
-        //$login_controller->shouldReceive('generateToken')->andReturn($token);
         $mock= $this->createPartialMock(LoginController::class, ['generateToken']);
         $mock->expects($this->once())
             ->method('generateToken')
@@ -94,5 +92,11 @@ class LoginControllerTest extends TestCase
         $response = $this->call('GET', "/login", $params);
         $response->assertStatus(200);
         $response->assertSessionHasAll($params);
+    }
+
+    public function testGenerateToken()
+    {
+        $controller = new LoginController();
+        $this->assertEquals(60, strlen($controller->generateToken()));
     }
 }
