@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Str;
 use Mockery;
 use Random;
