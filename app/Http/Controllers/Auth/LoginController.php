@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Str;
+use Random;
 use sinkcup\LaravelMakeAuthSocialite\Http\Controllers\SocialiteLoginController;
 
 class LoginController extends SocialiteLoginController
@@ -51,7 +51,7 @@ class LoginController extends SocialiteLoginController
     {
         $uri = '/home';
         $user = auth()->user();
-        $token = $this->generateToken();
+        $token = Random::generate(60);
         $user->forceFill([
             'api_token' => $token,
         ])->save();
@@ -59,10 +59,5 @@ class LoginController extends SocialiteLoginController
             $uri = 'http://' . session('gw_address') . ':' . session('gw_port') . '/wifidog/auth?token=' . $token;
         }
         return $uri;
-    }
-
-    public function generateToken()
-    {
-        return Str::random(60);
     }
 }

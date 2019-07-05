@@ -14,7 +14,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "sinkcup/laravel-make-auth-socialite": "^4.1.0"
+        "sinkcup/laravel-make-auth-socialite": "^4.1.0",
+        "webcraft/laravel-random": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

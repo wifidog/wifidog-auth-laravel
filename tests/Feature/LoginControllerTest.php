@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Str;
 use Mockery;
+use Random;
 use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -50,11 +50,7 @@ class LoginControllerTest extends TestCase
         $provider->shouldReceive('scopes')->andReturn($provider);
 
         $token = Str::random(60);
-        $mock= $this->createPartialMock(LoginController::class, ['generateToken']);
-        $mock->expects($this->once())
-            ->method('generateToken')
-            ->willReturn($token);
-        App::instance(LoginController::class, $mock);
+        Random::shouldReceive('generate')->with(60)->andReturn($token);
 
         $driver = 'facebook';
         Socialite::shouldReceive('driver')->with($driver)->andReturn($provider);
@@ -90,12 +86,6 @@ class LoginControllerTest extends TestCase
         $response = $this->call('GET', "/login", $params);
         $response->assertStatus(200);
         $response->assertSessionHasAll($params);
-    }
-
-    public function testGenerateToken()
-    {
-        $controller = new LoginController();
-        $this->assertEquals(60, strlen($controller->generateToken()));
     }
 
     public function testRedirectIfAuthenticated()
