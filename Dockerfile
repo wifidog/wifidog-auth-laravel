@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.2-apache-stretch
 MAINTAINER sinkcup <sinkcup@gmail.com>
 
 RUN apt-get update \
