@@ -29,7 +29,6 @@ touch database/database.sqlite
 chmod 777 database
 chmod 666 database/database.sqlite
 php artisan key:generate
-php artisan jwt:secret
 php artisan migrate
 ./phpunit.sh
 
@@ -61,7 +60,6 @@ docker run --rm \
     --env APP_NAME="Wifidog Auth" \
     --env APP_ENV=local \
     --env APP_KEY=base64:silhtn4zkyodaaDIRSU0QEqq4CwKfjdzLqZectaHIi8= \
-    --env JWT_SECRET=EYyXkh0xqc9mdDB93KQVfit0ykyTAknuNlmoPnGkp0cfiFScFMBSy6Prlk0DZdg8 \
     --env DB_CONNECTION=mysql \
     --env DB_HOST=172.17.0.1 \
     --env DB_PORT=3306 \
