@@ -36,6 +36,7 @@ npm install
 npm run dev
 sudo ln -s `pwd` /var/www/
 sudo ln -s `realpath config/apache2/sites-available/laravel.conf` /etc/apache2/sites-available/
+sudo a2enmod rewrite
 sudo a2ensite laravel && sudo service apache2 restart
 echo '127.0.0.1 wifidog-auth.lan' | sudo tee -a /etc/hosts
 curl 'http://wifidog-auth.lan/ping?gw_id=001217DA42D2&sys_uptime=742725&sys_memfree=2604&sys_load=0.03&wifidog_uptime=3861'
