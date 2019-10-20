@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Faker\Generator as Faker;
-use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
+use sinkcup\LaravelUiSocialite\SocialAccount;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
 
 $factory->define(SocialAccount::class, function (Faker $faker) {
     return [
-        'user_id' => 1,
+        'user_id' => $faker->randomNumber(),
         'provider' => $faker->word,
         'provider_user_id' => $faker->word . $faker->randomNumber(),
         'access_token' => $faker->md5,

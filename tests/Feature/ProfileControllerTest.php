@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
+use sinkcup\LaravelUiSocialite\SocialAccount;
 use Tests\TestCase;
 
 class ProfileControllerTest extends TestCase
@@ -17,7 +17,7 @@ class ProfileControllerTest extends TestCase
         $social_account = factory(SocialAccount::class)->create(['user_id' => $user->id]);
         $response = $this->actingAs($user)->get('/settings/profile');
 
-        $response->assertViewIs('user.profile_edit');
+        $response->assertViewIs('settings.profile');
         $response->assertViewHas('user', $user);
         $response->assertViewHas('social_login_providers', config('auth.social_login.providers'));
         $response->assertViewHas('linked_providers', [$social_account->provider]);

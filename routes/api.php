@@ -13,10 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('user', 'API\UserController@show');
+    Route::apiResource('users', 'API\UserController');
 });
 
-Route::get('/auth', 'AuthController@index');
-Route::post('/ping', 'GatewayController@ping');
-Route::get('/ping', 'GatewayController@ping'); // wifidog-gateway is wrong, it should use post not get.
+Route::get('/auth', 'API\AuthController@index')->middleware('auth.wifidog');
+Route::post('/ping', 'API\GatewayController@ping');
+Route::get('/ping', 'API\GatewayController@ping'); // wifidog-gateway is wrong, it should use post not get.

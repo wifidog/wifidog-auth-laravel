@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Meta;
-
 class HomeController extends Controller
 {
     /**
@@ -19,7 +17,7 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
@@ -29,8 +27,7 @@ class HomeController extends Controller
             'msg' => 'auth.logged_in',
         ];
         if (session('gw_address') && session('gw_port')) {
-            $data['wifidog_uri'] = 'http://' . session('gw_address') . ':' . session('gw_port') . '/wifidog/auth?token=' . $token;
-            Meta::set('wifidog-token', $token);
+            $data['wifidog_uri'] = "http://{session('gw_address')}:{session('gw_port')}/wifidog/auth?token={$token}";
         }
         return view('home', $data);
     }

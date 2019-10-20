@@ -2,19 +2,19 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Str;
 use Mockery;
-use Random;
-use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
+use sinkcup\LaravelUiSocialite\SocialAccount;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 use Socialite;
+use phpmock\MockBuilder;
+use phpmock\functions\FixedValueFunction;
 
 class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     public function testHandleProviderCallbackFailedWithInvalidState()
     {
         $params = [
@@ -48,8 +48,14 @@ class LoginControllerTest extends TestCase
         $provider->shouldReceive('user')->andReturn($abstract_user);
         $provider->shouldReceive('scopes')->andReturn($provider);
 
-        $token = Str::random(60);
-        Random::shouldReceive('generate')->with(60)->andReturn($token);
+        $builder = new MockBuilder();
+        $token = $this->faker->regexify('[A-Za-z0-9]{80}');
+        $builder->setNamespace('App\Http\Controllers\Auth')
+        ->setName("bin2hex")
+        ->setFunctionProvider(new FixedValueFunction($token));
+
+        $mock = $builder->build();
+        $mock->enable();
 
         $driver = 'facebook';
         Socialite::shouldReceive('driver')->with($driver)->andReturn($provider);

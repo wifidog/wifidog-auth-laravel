@@ -63,7 +63,7 @@
                     <div class="card-body text-center">
                         <ul class="nav justify-content-center">
                             @foreach ($social_login_providers as $provider)
-                                <li class="nav-item mr-2 mb-2">
+                                <li class="nav-item mr-2 mt-2">
                                     @if (in_array(strtolower($provider), $linked_providers))
                                         <a class="nav-link btn btn-success disabled" href="#" role="button">{{ __($provider) }}</a>
                                     @else

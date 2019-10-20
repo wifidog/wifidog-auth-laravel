@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
-use Meta;
+use Illuminate\Support\Str;
 
 class AuthControllerTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     public function testAuthLostParams()
     {
         $params = [
@@ -19,26 +19,17 @@ class AuthControllerTest extends TestCase
         ];
         $response = $this->call('GET', '/auth/', $params);
 
-        $response->assertStatus(400);
-        $this->assertEquals('Auth: -1', $response->getContent());
+        $response->assertStatus(401);
+        $this->assertEquals('Auth: 0', $response->getContent());
     }
 
     public function grantToken()
     {
         $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)
-            ->withSession([
-                'gw_address' => '192.168.199.1',
-                'gw_port' => '2060',
-            ])->get('/home');
-        $response->assertViewHas('wifidog_uri');
-        $wifidog_token = Meta::get('wifidog-token');
-        $this->assertNotEmpty($wifidog_token);
-        return $wifidog_token;
+        return $user->api_token;
     }
 
-    public function testLogin()
+    public function testLoginSuccess()
     {
         $params = [
             'stage' => 'login',

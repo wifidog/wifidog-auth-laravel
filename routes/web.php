@@ -11,16 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Welcome');
 
-Auth::routes(config('auth.options'));
+Auth::routes(config('auth.options') ?? []);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/messages', 'MessageController@index');
 Route::get('/portal', 'PortalController@index');
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-Route::get('settings/profile', 'ProfileController@edit')->name('profile.edit');
-Route::put('settings/profile', 'ProfileController@update')->name('profile.update');
+Route::get('settings/profile', 'Settings\ProfileController@edit')->name('profile.edit');
+Route::put('settings/profile', 'Settings\ProfileController@update')->name('profile.update');

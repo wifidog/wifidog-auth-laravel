@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use sinkcup\LaravelMakeAuthSocialite\SocialAccount;
+use sinkcup\LaravelUiSocialite\SocialAccount;
 use Validator;
 
 class ProfileController extends Controller
@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $user = auth()->user();
         $social_login_providers = config('auth.social_login.providers');
         $linked_providers = SocialAccount::where('user_id', $user->id)->select(['provider'])->pluck('provider')->all();
-        return view('user.profile_edit', compact('user', 'social_login_providers', 'linked_providers'));
+        return view('settings.profile', compact('user', 'social_login_providers', 'linked_providers'));
     }
 
     /**

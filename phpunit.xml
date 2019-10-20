@@ -22,9 +22,6 @@
             <directory suffix=".php">./app</directory>
         </whitelist>
     </filter>
-    <logging>
-        <log type="coverage-clover" target="clover.xml"/>
-    </logging>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
@@ -33,4 +30,7 @@
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
     </php>
+    <logging>
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
 </phpunit>
