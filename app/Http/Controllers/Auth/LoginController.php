@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Random;
-use sinkcup\LaravelMakeAuthSocialite\Http\Controllers\SocialiteLoginController;
+use sinkcup\LaravelUiSocialite\Socialite\Controllers\SocialiteLoginController;
 
 class LoginController extends SocialiteLoginController
 {
@@ -51,7 +51,7 @@ class LoginController extends SocialiteLoginController
     {
         $uri = '/home';
         $user = auth()->user();
-        $token = Random::generate(60);
+        $token = bin2hex(random_bytes(80));
         $user->forceFill([
             'api_token' => $token,
         ])->save();

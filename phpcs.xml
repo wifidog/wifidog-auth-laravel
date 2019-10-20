@@ -10,15 +10,8 @@
  <exclude-pattern>*\.js</exclude-pattern>
  <exclude-pattern>*\.css</exclude-pattern>
 
- <!-- Include the whole PSR2 standard -->
- <rule ref="PSR2"/>
- 
- <!-- Lines can be longer -->
- <rule ref="Generic.Files.LineLength">
-  <properties>
-   <property name="lineLimit" value="9999"/>
-  </properties>
- </rule>
+ <!-- Include the whole PSR12 standard -->
+ <rule ref="PSR12"/>
 
  <!-- ignore WARNING: A file should declare new symbols -->
  <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">

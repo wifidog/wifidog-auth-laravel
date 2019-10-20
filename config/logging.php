@@ -36,7 +36,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
+            'channels' => preg_split('/,/', env('LOG_STACK_CHANNELS', 'stderr'), null, PREG_SPLIT_NO_EMPTY),
             'ignore_exceptions' => false,
         ],
 
@@ -88,6 +88,11 @@ return [
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => 'debug',
+        ],
+
+        'null' => [
+            'driver' => 'monolog',
+            'handler' => NullHandler::class,
         ],
     ],
 

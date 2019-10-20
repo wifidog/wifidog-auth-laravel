@@ -1,4 +1,4 @@
-# Wifidog Auth (Laravel 5.8)
+# Wifidog Auth (Laravel 6)
 
 [![CircleCI](https://circleci.com/gh/wifidog/wifidog-auth-laravel.svg?style=svg)](https://circleci.com/gh/wifidog/wifidog-auth-laravel)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/wifidog/wifidog-auth-laravel.svg)](https://hub.docker.com/r/wifidog/wifidog-auth-laravel)
@@ -158,5 +158,5 @@ If you have problems, try these methods:
 ## Tech
 
 - PHP Framework: [Laravel](https://laravel.com/)
-- Coding standard: following [PSR-2](http://www.php-fig.org/psr/psr-2/). run `./lint.sh` to check.
+- Coding standard: following [PSR-12](http://www.php-fig.org/psr/psr-12/). run `./lint.sh`
 - Unit Test: using PHPUnit. run `./phpunit.sh`

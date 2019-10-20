@@ -18,6 +18,19 @@ Mandatory arguments to long options are mandatory for short options too.
   [FILEs]                     One or more files and/or directories to check
                              (the current directory by default)."
 
+# check OS
+if [[ "$OSTYPE" == "darwin"* ]] && [[ $(command -v getopt) == "/usr/bin/getopt" ]]; then
+    echo "ERROR: can not find gnu-getopt, the getopt in macOS is useless"
+        echo "----------------------------------------------------------------------"
+        echo "     TRY:"
+        echo "     brew install gnu-getopt"
+        echo "     brew link --force gnu-getopt"
+        echo "     echo 'export PATH=\"/usr/local/opt/gnu-getopt/bin:\$PATH\"' >> ~/.bash_profile"
+        echo "     source ~/.bash_profile"
+        echo "----------------------------------------------------------------------"
+        exit 1
+fi
+
 TEMP=$(getopt -o afhs: --long all,fix,help,standard: -n "$CMD_NAME" -- "$@")
 
 if [ $? != 0 ]; then
@@ -30,10 +43,9 @@ eval set -- "$TEMP"
 while true; do
         case "$1" in
                 -a|--all)
-                    PHP_FILES=$(ls *.php)
-                    DIRS=$(ls -d */)
+                    PHP_FILES=$(ls ./*.php)
+                    DIRS=$(ls -d ./*/)
                     FILES="$PHP_FILES"$'\n'"$DIRS"
-                    #FILES=$(pwd) # phpcs is too slow when check big project, just as phpunit
                     shift;;
                 -f|--fix)
                     BIN="phpcbf"
@@ -53,9 +65,9 @@ BIN_PATH=""
 if [ -f ./vendor/bin/$BIN ]; then
     BIN_PATH=./vendor/bin/$BIN
 else
-    BIN_PATH=$(which $BIN)
+    BIN_PATH=$(command -v $BIN)
     if [ $? -ne 0 ]; then
-        echo "ERROR: can not find "$BIN""
+        echo "ERROR: can not find $BIN"
         echo "----------------------------------------------------------------------"
         echo "     TRY:     composer require --dev squizlabs/php_codesniffer"
         echo "----------------------------------------------------------------------"
@@ -63,7 +75,7 @@ else
     fi
 fi
 
-if [ -z $STANDARD ]; then
+if [ -z "$STANDARD" ]; then
     if [ -f "$DIR/phpcs.xml" ]; then
         STANDARD="$DIR/phpcs.xml"
     else
@@ -76,18 +88,28 @@ if [ -z "$FILES" ]; then
 fi
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
+PARENT=$(git show-branch -a \
+| grep '\*' \
+| grep -v "$(git rev-parse --abbrev-ref HEAD)" \
+| head -n1 \
+| sed 's/.*\[\(.*\)\].*/\1/' \
+| sed 's/[\^~].*//')
+echo "DEBUG: branch $BRANCH parent $PARENT"
 
 if [ -z "$FILES" ]; then
-    FILES=$(git diff --diff-filter=ACM --name-only HEAD | grep .php)
-    if [ "$BRANCH" != "master" ]; then
-        # compare this branch with master
-        BRANCH_FILES=$(git diff --diff-filter=ACM --name-only master...$BRANCH | grep .php)
-        FILES="$FILES"$'\n'"$BRANCH_FILES"
-    elif [ -z "$FILES" ]; then
-        # if run lint on master, if there is no modified FILES, means have commited, so check last commit.
-        FILES=$(git diff --diff-filter=ACM --name-only HEAD^ HEAD | grep .php)
+    FILES=$(git diff --diff-filter=ACMR --name-only HEAD | grep .php)
+    if [ -z "$FILES" ]; then
+        if [ -n "$PARENT" ]; then
+            # compare this branch with parent
+            BRANCH_FILES=$(git diff --diff-filter=ACM --name-only "$PARENT"..."$BRANCH" | grep .php)
+            FILES="$FILES"$'\n'"$BRANCH_FILES"
+        else
+            # if it's orphan, check last commit.
+            FILES=$(git diff --diff-filter=ACM --name-only HEAD^ HEAD | grep .php)
+        fi
     fi
     if [ -z "$FILES" ]; then
+        echo "DEBUG: FILES is empty, exit"
         exit 0
     fi
 fi
@@ -95,10 +117,17 @@ fi
 ERRORS=0
 for FILENAME in $FILES
 do
-    OUTPUT=$($BIN_PATH --standard=$STANDARD $FILENAME)
+    OUTPUT=$($BIN_PATH --standard=$STANDARD "$FILENAME")
     if [ $? -ne 0 ]; then
-        ERRORS=$(($ERRORS+1))
+        ERRORS=$((ERRORS+1))
         echo "$OUTPUT"
+    fi
+    if [ $BIN == 'phpcs' ]; then
+        OUTPUT=$(php -l "$FILENAME")
+        if [ $? -ne 0 ]; then
+            ERRORS=$((ERRORS+1))
+            echo "$OUTPUT"
+        fi
     fi
 done
 
