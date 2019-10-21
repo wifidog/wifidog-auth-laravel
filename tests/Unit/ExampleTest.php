@@ -32,27 +32,4 @@ class ExampleTest extends TestCase
         $this->assertEquals($user1->toArray(), User::first()->toArray());
         $this->assertEquals($name, User::where('email', $email)->first()->name);
     }
-
-    public function testPhpRedis()
-    {
-        $user = factory(User::class)->create();
-        $redis = new Redis();
-        $redis->connect(config('database.redis.default.host'));
-        $key = 'user:profile:' . $this->faker->randomNumber();
-        $redis->hMSet($key, $user->toArray());
-        $this->assertEquals($user->toArray(), $redis->hGetAll($key));
-        $this->assertEmpty(RedisManager::hgetall($key));
-    }
-
-    public function testRedisManager()
-    {
-        $user = factory(User::class)->create();
-        $key = 'user:profile:' . $this->faker->randomNumber();
-        RedisManager::hmset($key, $user->toArray());
-        $this->assertEquals($user->toArray(), RedisManager::hgetall($key));
-        $redis = new Redis();
-        $redis->connect(config('database.redis.default.host'));
-        // NOTICE: laravel RedisManager has prefix
-        $this->assertEquals($user->toArray(), $redis->hGetAll(config('database.redis.options.prefix') . $key));
-    }
 }
