@@ -1,6 +1,14 @@
-Dockerfile
-.dockerignore
-.git
+.env
+.gitignore
+.git/
+.idea/
 bootstrap/cache/*
+database/*.sqlite
+laradock/
 node_modules/
+storage/app/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
 vendor/
