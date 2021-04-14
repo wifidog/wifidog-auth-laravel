@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Random;
-use sinkcup\LaravelUiSocialite\Socialite\Controllers\SocialiteLoginController;
+use LaravelFans\UiSocialite\Socialite\Controllers\SocialiteLoginController;
 
 class LoginController extends SocialiteLoginController
 {

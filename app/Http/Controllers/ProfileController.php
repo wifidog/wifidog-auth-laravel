@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use sinkcup\LaravelUiSocialite\SocialAccount;
+use LaravelFans\UiSocialite\SocialAccount;
 use Validator;
 
 class ProfileController extends Controller
