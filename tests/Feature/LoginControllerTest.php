@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Mockery;
-use sinkcup\LaravelUiSocialite\SocialAccount;
+use LaravelFans\UiSocialite\SocialAccount;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;

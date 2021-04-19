@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use sinkcup\LaravelUiSocialite\SocialAccount;
+use LaravelFans\UiSocialite\SocialAccount;
 use Tests\TestCase;
 
 class ProfileControllerTest extends TestCase
