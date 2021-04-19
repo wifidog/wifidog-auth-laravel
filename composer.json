@@ -21,6 +21,7 @@
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.16.4",
         "fakerphp/faker": "^1.9.1",
+        "laravel-fans/docker": "^0.3.1",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "php-mock/php-mock": "^2.1",

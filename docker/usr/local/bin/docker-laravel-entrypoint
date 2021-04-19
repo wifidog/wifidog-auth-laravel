@@ -9,7 +9,7 @@ cd /var/www/laravel
 
 if [[ "$DB_CONNECTION" = "sqlite" ]]; then
     touch database/database.sqlite
-    chmod 666 database/database.sqlite
+    chown -R www-data:www-data database/
 fi
 php artisan migrate --force
 
