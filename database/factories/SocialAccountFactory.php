@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Faker\Generator as Faker;
-use sinkcup\LaravelUiSocialite\SocialAccount;
+use LaravelFans\UiSocialite\SocialAccount;
 
 /*
 |--------------------------------------------------------------------------
