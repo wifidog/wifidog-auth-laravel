@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use Random;
 use LaravelFans\UiSocialite\Socialite\Controllers\SocialiteLoginController;
 
@@ -17,6 +18,8 @@ class LoginController extends SocialiteLoginController
     | to conveniently provide its functionality to your applications.
     |
     */
+
+    private $redirectToForLogout = '/';
 
     /**
      * Create a new controller instance.
@@ -59,5 +62,31 @@ class LoginController extends SocialiteLoginController
             $uri = 'http://' . session('gw_address') . ':' . session('gw_port') . '/wifidog/auth?token=' . $token;
         }
         return $uri;
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        if (session('gw_address') && session('gw_port')) {
+            $this->redirectToForLogout = 'http://' . session('gw_address') . ':' . session('gw_port')
+                . '/wifidog/auth?logout=1&token=' . $request->user()->api_token;
+        }
+        return parent::logout($request);
+    }
+
+    /**
+     * The user has logged out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    protected function loggedOut(Request $request)
+    {
+        return redirect($this->redirectToForLogout);
     }
 }

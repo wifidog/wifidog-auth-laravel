@@ -100,4 +100,28 @@ class LoginControllerTest extends TestCase
             ->get('/login');
         $response->assertRedirect('/home');
     }
+
+    public function testLogout()
+    {
+        $user = factory(User::class)->create();
+
+        $gw_address = $this->faker->ipv4;
+        $gw_port = $this->faker->numberBetween(1025, 9999);
+        $response = $this->actingAs($user)
+            ->withSession([
+                'gw_address' => $gw_address,
+                'gw_port' => $gw_port,
+            ])->post('/logout');
+        $response->assertRedirect('http://' . $gw_address . ':' . $gw_port . '/wifidog/auth?logout=1&token='
+            . $user->api_token);
+    }
+
+    public function testLogoutWithoutWifidog()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)
+            ->post('/logout');
+        $response->assertRedirect('/');
+    }
 }
