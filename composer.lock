@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d538102e415c078c12d13eeabdd794f2",
+    "content-hash": "c095195fa98e470f1898a6080097a18a",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -5947,16 +5947,16 @@
         },
         {
             "name": "laravel-fans/docker",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-fans/laravel-docker.git",
-                "reference": "128ffc2dae982e06ec404254276d7b72a6690023"
+                "reference": "f654a3655fade94c5e09f98418c02140021a4de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-fans/laravel-docker/zipball/128ffc2dae982e06ec404254276d7b72a6690023",
-                "reference": "128ffc2dae982e06ec404254276d7b72a6690023",
+                "url": "https://api.github.com/repos/laravel-fans/laravel-docker/zipball/f654a3655fade94c5e09f98418c02140021a4de4",
+                "reference": "f654a3655fade94c5e09f98418c02140021a4de4",
                 "shasum": ""
             },
             "require": {
@@ -5991,9 +5991,9 @@
             "description": "Full Laravel production environment for Docker",
             "support": {
                 "issues": "https://github.com/laravel-fans/laravel-docker/issues",
-                "source": "https://github.com/laravel-fans/laravel-docker/tree/0.3.1"
+                "source": "https://github.com/laravel-fans/laravel-docker/tree/0.3.2"
             },
-            "time": "2021-04-19T08:25:13+00:00"
+            "time": "2021-04-25T02:19:42+00:00"
         },
         {
             "name": "mockery/mockery",

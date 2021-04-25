@@ -31,14 +31,11 @@ RUN npm install
 COPY docker/ /
 RUN a2enmod rewrite headers \
     && a2ensite laravel \
-    && a2dissite 000-default
+    && a2dissite 000-default \
+    && chmod +x /usr/local/bin/docker-laravel-entrypoint
 
 COPY . /var/www/laravel
 RUN composer install --optimize-autoloader --no-dev \
   && npm run production
-
-RUN chown www-data:www-data bootstrap/cache \
-    && chown -R www-data:www-data storage/ \
-    && chmod +x /usr/local/bin/docker-laravel-entrypoint
 
 CMD ["docker-laravel-entrypoint"]
