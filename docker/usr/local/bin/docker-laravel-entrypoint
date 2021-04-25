@@ -7,6 +7,9 @@ env=${APP_ENV:-production}
 
 cd /var/www/laravel
 
+chown www-data:www-data bootstrap/cache
+chown -R www-data:www-data storage/
+
 if [[ "$DB_CONNECTION" = "sqlite" ]]; then
     touch database/database.sqlite
     chown -R www-data:www-data database/
