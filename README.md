@@ -7,20 +7,49 @@
 
 This project provides a auth server for wifidog. For API details, please see the [WiFiDog Protocol V1](http://dev.wifidog.org/wiki/doc/developer/WiFiDogProtocol_V1).
 
-## Pages
+## Features
 
-- login/
-- portal/
-- messages/ OR gw\_message.php
-
-## Apis
-
-- ping/
-- auth/
+- Pages
+  - /login
+  - /logout
+  - /portal
+  - /messages OR gw\_message.php
+- Apis
+  - /ping
+  - /auth
 
 ## Getting Started
 
+### Docker
+
+```shell
+docker run -p 8000:80 \
+    --env APP_NAME="Wifidog Auth" \
+    --env APP_ENV=local \
+    --env APP_KEY=base64:silhtn4zkyodaaDIRSU0QEqq4CwKfjdzLqZectaHIi8= \
+    --env DB_CONNECTION=sqlite \
+    wifidog/wifidog-auth-laravel
+
+open http://127.0.0.1:8000
 ```
+
+```shell
+docker run -p 8000:80 \
+    --env APP_NAME="Wifidog Auth" \
+    --env APP_ENV=local \
+    --env APP_KEY=base64:silhtn4zkyodaaDIRSU0QEqq4CwKfjdzLqZectaHIi8= \
+    --env DB_CONNECTION=mysql \
+    --env DB_HOST=172.17.0.1 \
+    --env DB_PORT=3306 \
+    --env DB_DATABASE=wifidog \
+    --env DB_USERNAME=root \
+    --env DB_PASSWORD=1 \
+    wifidog/wifidog-auth-laravel
+```
+
+### not Docker
+
+```shell
 composer install
 cp .env.example .env
 sudo chmod 777 bootstrap/cache
@@ -45,7 +74,7 @@ google-chrome http://wifidog-auth.lan/
 
 If you want to use MySQL, change `.env` like this\(don't forget to [migrate](https://laravel.com/docs/migrations#running-migrations) again\):
 
-```
+```ini
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -54,36 +83,20 @@ DB_USERNAME=root
 DB_PASSWORD=1
 ```
 
-### Docker
-
-```
-docker run --rm \
-    --env APP_NAME="Wifidog Auth" \
-    --env APP_ENV=local \
-    --env APP_KEY=base64:silhtn4zkyodaaDIRSU0QEqq4CwKfjdzLqZectaHIi8= \
-    --env DB_CONNECTION=mysql \
-    --env DB_HOST=172.17.0.1 \
-    --env DB_PORT=3306 \
-    --env DB_DATABASE=wifidog \
-    --env DB_USERNAME=root \
-    --env DB_PASSWORD=1 \
-    -it "wifidog/wifidog-auth-laravel"
-```
-
 ## Wifidog Config
 
 If you want to use local computer as web server and your phone for auth test, you should login into your openwrt router, then add computer IP to `/etc/hosts`, and change `/etc/wifidog.conf`.
 
 If your web server IP is 192.168.1.42, mac is 00:00:DE:AD:BE:AF, and your openwrt router IP is 192.168.1.1, operate like this:
 
-```
+```shell
 ssh root@192.168.1.1
 echo "192.168.1.42 wifidog-auth" >> /etc/hosts
 /etc/init.d/dnsmasq restart
 vi /etc/wifidog.conf
 ```
 
-```
+```txt
 AuthServer {
     Hostname wifidog-auth.lan
     Path /
@@ -91,7 +104,7 @@ AuthServer {
 TrustedMACList 00:00:DE:AD:BE:AF
 ```
 
-```
+```shell
 /etc/init.d/wifidog restart
 sleep 10
 /etc/init.d/wifidog status
@@ -105,9 +118,9 @@ After register or login, you can use internet.
 
 ### Social Login
 
-If you want to use Facebook Login\([more providers are here](https://github.com/sinkcup/laravel-make-auth-socialite)\), add these to `.env`
+If you want to use Facebook Login\([more providers are here](https://github.com/laravel-fans/laravel-ui-socialite)\), add these to `.env`
 
-```
+```ini
 FACEBOOK_APP_ID=123456
 FACEBOOK_APP_SECRET=secret
 FACEBOOK_VALID_OAUTH_REDIRECT_URI="http://wifidog-auth.lan/login/facebook/callback"
@@ -116,7 +129,7 @@ AUTH_SOCIAL_LOGIN_PROVIDERS="Facebook"
 
 then change ipset of router:
 
-```
+```shell
 ssh root@192.168.1.1
 opkg update
 opkg install dnsmasq-full
@@ -128,7 +141,7 @@ fw3 reload
 
 Add this to `/etc/wifidog.conf`
 
-```
+```txt
 FirewallRuleSet unknown-users {
     FirewallRule allow to-ipset facebook
 }
@@ -136,7 +149,7 @@ FirewallRuleSet unknown-users {
 
 If your router doesn't support ipset, can only add these to `/etc/wifidog.conf`, but this way can not guarantee the reliability.
 
-```
+```txt
 FirewallRuleSet global {
     FirewallRule allow tcp to www.facebook.com
     FirewallRule allow tcp to m.facebook.com
@@ -144,7 +157,7 @@ FirewallRuleSet global {
 }
 ```
 
-```
+```shell
 /etc/init.d/wifidog restart
 ```
 
