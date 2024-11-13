@@ -17,6 +17,11 @@
                     @if (!empty($wifidog_uri))
                     <a class="btn btn-success" href={{ $wifidog_uri }}>start internet</a>
                     @endif
+                    <a class="btn btn-warning" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
                 </div>
             </div>
         </div>
