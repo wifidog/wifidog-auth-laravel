@@ -22,7 +22,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => $faker->regexify('[A-Za-z0-9]{10}'),
-        'api_token' => $faker->regexify('[A-Za-z0-9]{80}'),
+        'api_token' => bin2hex(random_bytes(16)),
         'avatar' => null,
     ];
 });

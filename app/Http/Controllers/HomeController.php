@@ -27,7 +27,7 @@ class HomeController extends Controller
             'msg' => 'auth.logged_in',
         ];
         if (session('gw_address') && session('gw_port')) {
-            $data['wifidog_uri'] = "http://{session('gw_address')}:{session('gw_port')}/wifidog/auth?token={$token}";
+            $data['wifidog_uri'] = "http://" . session('gw_address') . ":" . session('gw_port') . "/wifidog/auth?token=" . $token;
         }
         return view('home', $data);
     }
