@@ -19,7 +19,7 @@ class HomeControllerTest extends TestCase
                 'gw_address' => '192.168.199.1',
                 'gw_port' => '2060',
             ])->get('/home');
-        $response->assertStatus(200)->assertViewHas('wifidog_uri');
+        $response->assertStatus(200)->assertViewHas('wifidog_uri', "http://192.168.199.1:2060/wifidog/auth?token=" . $user->api_token);
     }
 
     public function testIndexWithoutWifidog()
