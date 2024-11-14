@@ -54,7 +54,7 @@ class LoginController extends SocialiteLoginController
     {
         $uri = '/home';
         $user = auth()->user();
-        $token = bin2hex(random_bytes(80));
+        $token = bin2hex(random_bytes(16));
         $user->forceFill([
             'api_token' => $token,
         ])->save();

@@ -49,7 +49,8 @@ class LoginControllerTest extends TestCase
         $provider->shouldReceive('scopes')->andReturn($provider);
 
         $builder = new MockBuilder();
-        $token = $this->faker->regexify('[A-Za-z0-9]{80}');
+        $token = bin2hex(random_bytes(16));
+        $this->assertEquals(32, strlen($token));
         $builder->setNamespace('App\Http\Controllers\Auth')
         ->setName("bin2hex")
         ->setFunctionProvider(new FixedValueFunction($token));
@@ -78,6 +79,7 @@ class LoginControllerTest extends TestCase
         $this->assertEquals(1, count($result));
         $user_in_db = $result[0];
         $this->assertEquals($user_name, $user_in_db->name);
+        $this->assertEquals($token, $user_in_db->api_token);
         $this->assertEquals($social_user_in_db->user_id, $user_in_db->id);
     }
 
