@@ -172,4 +172,4 @@ If you have problems, try these methods:
 
 - PHP Framework: [Laravel](https://laravel.com/)
 - Coding standard: following [PSR-12](http://www.php-fig.org/psr/psr-12/). run `./lint.sh`
-- Unit Test: using PHPUnit. run `./phpunit.sh`
+- Unit Test: using PHPUnit. run `php artisan test`
