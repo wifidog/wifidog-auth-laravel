@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Gateway;
+use App\Models\Gateway;
 use Validator;
 
 class GatewayController extends Controller

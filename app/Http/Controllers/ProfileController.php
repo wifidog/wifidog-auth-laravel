@@ -2,52 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use LaravelFans\UiSocialite\SocialAccount;
-use Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Display the user's profile form.
      */
-    public function __construct()
+    public function edit(Request $request): View
     {
-        $this->middleware('auth');
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Update the user's profile information.
      */
-    public function edit()
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = auth()->user();
-        $social_login_providers = config('auth.social_login.providers');
-        $linked_providers = SocialAccount::where('user_id', $user->id)->select(['provider'])->pluck('provider')->all();
-        return view('settings.profile', compact('user', 'social_login_providers', 'linked_providers'));
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**
-     * Update the user's profile.
-     *
-     * @param  Request  $request
-     * @return \Illuminate\Http\Response
+     * Delete the user's account.
      */
-    public function update(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
         $user = $request->user();
-        Validator::make($request->all(), [
-            'email' => [
-                Rule::unique('users')->ignore($user->id),
-            ],
-            'name' => 'string|max:255',
-        ])->validate();
-        $user->update($request->all());
-        return redirect(route('profile.edit'));
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
     }
 }

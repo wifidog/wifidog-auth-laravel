@@ -17,7 +17,7 @@ class MessageController extends Controller
      */
     public function index(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'message' => 'required|string|in:denied,activate,failed_validation',
         ]);
         return view('message', [

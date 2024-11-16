@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\GatewayController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +15,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['auth:api']], function () {
-    Route::get('user', 'API\UserController@show');
-    Route::apiResource('users', 'API\UserController');
-});
-
-Route::get('/auth', 'API\AuthController@index')->middleware('auth.wifidog');
-Route::post('/ping', 'API\GatewayController@ping');
-Route::get('/ping', 'API\GatewayController@ping'); // wifidog-gateway is wrong, it should use post not get.
+Route::get('/auth', [AuthController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/ping', [GatewayController::class, 'ping']);
+Route::get('/ping', [GatewayController::class, 'ping']); // wifidog-gateway is wrong, it should use post not get.
