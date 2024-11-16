@@ -1,16 +1,29 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use App\Gateway;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-$factory->define(Gateway::class, function (Faker $faker) {
-    return [
-        'id' => $faker->md5,
-        'sys_uptime' => $faker->randomNumber(),
-        'sys_memfree' => $faker->randomNumber(),
-        'sys_load' => $faker->randomFloat(2, 0, 100),
-        'wifidog_uptime' => $faker->randomNumber(),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
+class GatewayFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'id' => fake()->md5(),
+            'sys_uptime' => fake()->randomNumber(),
+            'sys_memfree' => fake()->randomNumber(),
+            'sys_load' => fake()->randomFloat(2, 0, 100),
+            'wifidog_uptime' => fake()->randomNumber(),
+        ];
+    }
+}

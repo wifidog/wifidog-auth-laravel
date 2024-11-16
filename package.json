@@ -1,26 +1,19 @@
 {
     "private": true,
+    "type": "module",
     "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "build": "vite build",
+        "dev": "vite"
     },
     "devDependencies": {
-        "axios": "^0.28.0",
-        "bootstrap": "^5.0.0",
-        "cross-env": "^7.0",
-        "jquery": "^3.6.0",
-        "laravel-mix": "^6.0.49",
-        "lodash": "^4.17.21",
-        "popper.js": "^1.16.1",
-        "resolve-url-loader": "^5.0.0",
-        "sass": "^1.32.8",
-        "sass-loader": "^13.2.0",
-        "vue": "^2.6.12",
-        "vue-template-compiler": "^2.6.12"
+        "@tailwindcss/forms": "^0.5.2",
+        "alpinejs": "^3.4.2",
+        "autoprefixer": "^10.4.2",
+        "axios": "^1.7.4",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^1.0",
+        "postcss": "^8.4.31",
+        "tailwindcss": "^3.1.0",
+        "vite": "^5.0"
     }
 }
