@@ -27,11 +27,18 @@ jobs:
           npm run build
 
       - name: PHPUnit
+        env:
+          XDEBUG_MODE: coverage
         run: |
-          php artisan test --log-junit junit.xml
+          php artisan test
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
