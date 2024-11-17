@@ -1,6 +1,8 @@
 name: Laravel 11
 on:
   push:
+    tags:
+      - v*
     paths-ignore:
       - "**.md"
     branches:
@@ -51,6 +53,7 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
 
   buildx:
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       -
@@ -66,8 +69,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
+        name: Get Version from Tag
+        id: tagver
+        uses: ChrSchu90/GitTagSemanticVersion@v1.1
+      -
         name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: wifidog/wifidog-auth-laravel:debug
+          tags: wifidog/wifidog-auth-laravel:latest,wifidog/wifidog-auth-laravel:${{ steps.tagver.outputs.version }}
