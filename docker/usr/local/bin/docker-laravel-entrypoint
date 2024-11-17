@@ -1,11 +1,38 @@
 #!/usr/bin/env bash
 
 set -e
+cd /var/www/laravel
 
 role=${CONTAINER_ROLE:-app}
-env=${APP_ENV:-production}
+if [[ -z "$APP_ENV" ]]; then
+    export APP_ENV=local
+    echo -e "\e[33mENV undefined: APP_ENV,\e[0m use default $APP_ENV"
+fi
 
-cd /var/www/laravel
+if [[ -z "$DB_CONNECTION" ]]; then
+    export DB_CONNECTION=sqlite
+    echo -e "\e[33mENV undefined: DB_CONNECTION,\e[0m use default $DB_CONNECTION"
+fi
+
+if [[ -z "$APP_KEY" ]]; then
+    msg="ENV undefined: APP_KEY"
+    if [[ "$APP_ENV" = "local" ]]; then
+        APP_KEY=$(php artisan key:generate --show)
+        export APP_KEY
+        echo -e "\e[33m${msg},\e[0m generated $APP_KEY"
+    else
+        echo -e "\e[31m${msg}\e[0m"
+        exit 1
+    fi
+fi
+
+if [[ "$APP_ENV" = "local" ]]; then
+    cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+else
+    echo "Caching configuration..."
+    php artisan config:cache
+    php artisan route:cache
+fi
 
 chown www-data:www-data bootstrap/cache
 chown -R www-data:www-data storage/
@@ -16,26 +43,22 @@ if [[ "$DB_CONNECTION" = "sqlite" ]]; then
 fi
 php artisan migrate --force
 
-if [[ "$env" != "local" ]]; then
-    echo "Caching configuration..."
-    php artisan config:cache
-    php artisan route:cache
-fi
-
 if [[ "$role" = "app" ]]; then
 
     exec apache2-foreground
 
 elif [[ "$role" = "scheduler" ]]; then
 
-    echo "start cron"
+    echo -e "\e[33mSUGGESTION: use K8s Job instead of docker cron\e[0m"
+    echo -e "\e[33m  https://kubernetes.io/docs/concepts/workloads/controllers/job/\e[0m"
+    echo "Running the cron..."
     crontab /var/spool/cron/crontabs/root
     cron -f
 
 elif [[ "$role" = "queue" ]]; then
 
     echo "Running the queue..."
-    php artisan queue:work --queue={default} --verbose --tries=3 --timeout=90
+    php artisan queue:work --queue="{default}" --verbose --tries=3 --timeout=90
 
 else
     echo "Could not match the container role: $role"
