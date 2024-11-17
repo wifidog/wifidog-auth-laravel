@@ -1,7 +1,8 @@
-# Wifidog Auth (Laravel 6)
+# Wifidog Auth (Laravel 11)
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/wifidog/wifidog-auth-laravel)](https://hub.docker.com/r/wifidog/wifidog-auth-laravel)
 [![codecov](https://codecov.io/github/wifidog/wifidog-auth-laravel/graph/badge.svg?token=KXFrMQY7vo)](https://codecov.io/github/wifidog/wifidog-auth-laravel)
+[![Docker Pulls](https://img.shields.io/docker/pulls/wifidog/wifidog-auth-laravel)](https://hub.docker.com/r/wifidog/wifidog-auth-laravel)
+[![Laravel 11](https://github.com/wifidog/wifidog-auth-laravel/actions/workflows/laravel-11.yml/badge.svg)](https://github.com/wifidog/wifidog-auth-laravel/actions/workflows/laravel-11.yml)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/wifidog/wifidog-auth-laravel/blob/master/LICENSE)
 
 This project provides a auth server for wifidog. For API details, please see the [WiFiDog Protocol V1](https://github.com/wifidog/wifidog-auth-laravel/wiki).
