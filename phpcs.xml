@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ruleset name="PSR12-laravel">
+  <description>The PSR12 standard, but ignore some rules for Laravel.</description>
+  <exclude-pattern>/bootstrap/cache/</exclude-pattern>
+  <exclude-pattern>/storage/</exclude-pattern>
+  <exclude-pattern>/vendor/</exclude-pattern>
+  <exclude-pattern>/_[a-zA-Z0-9\._]+\.php</exclude-pattern>
+  <exclude-pattern>/\.[a-zA-Z0-9\._]+\.php</exclude-pattern>
+  <arg name="extensions" value="php" />
+
+  <!-- Include the whole PSR12 standard -->
+  <rule ref="PSR12"/>
+
+  <!-- ignore ERROR: Each class must be in a namespace of at least one level (a top-level vendor name) -->
+  <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+    <exclude-pattern>/database/migrations/</exclude-pattern>
+    <exclude-pattern>/database/seeds/</exclude-pattern>
+  </rule>
+
+  <!-- ignore WARNING: No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them. -->
+  <rule ref="Internal.NoCodeFound">
+    <exclude-pattern>/resources/views/</exclude-pattern>
+  </rule>
+
+  <!-- ignore WARNING: A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute logic with side effects, but should not do both. The first symbol is defined on line 10 and the first side effect is on line 24. -->
+  <rule ref="PSR1.Files.SideEffects">
+    <exclude-pattern>/public/index.php</exclude-pattern>
+  </rule>
+
+</ruleset>
