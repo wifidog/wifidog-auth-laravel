@@ -5,14 +5,16 @@ WORKDIR /var/www/laravel
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar \
     && chmod +x /usr/local/bin/composer
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3008
-RUN apt-get update \
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install --no-install-recommends -y \
     cron \
     icu-devtools \
     jq \
     libfreetype6-dev libicu-dev libjpeg62-turbo-dev libpng-dev libpq-dev \
     libsasl2-dev libssl-dev libwebp-dev libxpm-dev libzip-dev libzstd-dev \
+    nodejs \
     unzip \
     zlib1g-dev \
     && apt-get clean \
@@ -30,24 +32,17 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
 COPY composer.json composer.lock ./
 RUN composer install --no-autoloader --no-scripts --no-dev
 
+COPY package*.json ./
+RUN npm install
+
 COPY docker/ /
 RUN a2enmod rewrite headers \
     && a2ensite laravel \
     && a2dissite 000-default \
     && chmod +x /usr/local/bin/docker-laravel-entrypoint
 
-RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y \
-    nodejs \
-    && apt-get clean \
-    && apt-get autoclean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-COPY package.json package-lock.json ./
-RUN npm install
-
 COPY . /var/www/laravel
 RUN composer install --optimize-autoloader --no-dev \
-  && npm run build
+    && npm run build
 
 CMD ["docker-laravel-entrypoint"]

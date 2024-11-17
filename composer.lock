@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c93c41fb49a5f33d433dfc88422b952",
+    "content-hash": "983fdef6d02ba305bc50b2561c6ff48a",
     "packages": [
         {
             "name": "brick/math",
@@ -6008,6 +6008,58 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "laravel-fans/docker",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-fans/laravel-docker.git",
+                "reference": "75fe9defc766d19fc33e489f52a90c16fa4117e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-fans/laravel-docker/zipball/75fe9defc766d19fc33e489f52a90c16fa4117e4",
+                "reference": "75fe9defc766d19fc33e489f52a90c16fa4117e4",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=v10"
+            },
+            "require-dev": {
+                "orchestra/testbench": ">=v3.5.6",
+                "phpmd/phpmd": "^2.11",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelFans\\Docker\\DockerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelFans\\Docker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sinkcup",
+                    "email": "sinkcup@gmail.com"
+                }
+            ],
+            "description": "Full Laravel production environment for Docker",
+            "support": {
+                "issues": "https://github.com/laravel-fans/laravel-docker/issues",
+                "source": "https://github.com/laravel-fans/laravel-docker/tree/v1.0.0"
+            },
+            "time": "2024-11-17T11:58:02+00:00"
         },
         {
             "name": "laravel-fans/lint",
