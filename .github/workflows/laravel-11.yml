@@ -20,9 +20,14 @@ jobs:
       - name: GitHub Environment Variables Action
         uses: FranzDiebold/github-env-vars-action@v2.1.0
 
-      - name: PHPUnit
+      - name: Prepare
         run: |
           composer install
+          npm install
+          npm run build
+
+      - name: PHPUnit
+        run: |
           php artisan test --log-junit junit.xml
 
       - name: Upload test results to Codecov
