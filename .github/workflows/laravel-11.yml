@@ -47,3 +47,5 @@ jobs:
 
       - name: Lint PHP
         run: php artisan lint:code
+
+      - uses: hadolint/hadolint-action@v3.1.0
