@@ -1,0 +1,26 @@
+name: laravel-11
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    container:
+      image: laravelfans/laravel:11-dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: GitHub Environment Variables Action
+        uses: FranzDiebold/github-env-vars-action@v2.1.0
+
+      - name: PHPUnit
+        run: |
+          composer install
+          php artisan test
