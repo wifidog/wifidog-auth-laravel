@@ -41,12 +41,10 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi",
-            "@php artisan migrate --graceful --ansi"
+        "post-install-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php artisan key:generate --ansi",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php artisan migrate --graceful --ansi"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
