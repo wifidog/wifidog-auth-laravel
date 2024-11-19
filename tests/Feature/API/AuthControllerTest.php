@@ -5,7 +5,6 @@ namespace Tests\Feature\API;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
-use Illuminate\Support\Str;
 
 class AuthControllerTest extends TestCase
 {

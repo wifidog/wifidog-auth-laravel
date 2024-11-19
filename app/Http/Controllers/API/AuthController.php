@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Validator;
 
 class AuthController extends Controller
@@ -40,12 +40,12 @@ class AuthController extends Controller
             'ip' => 'ip',
             'mac' => 'string',
         ]);
-        $user_status = -1;
+        $userStatus = -1;
         $status = 400;
         if (!$validator->fails()) {
-            $user_status = 1;
+            $userStatus = 1;
             $status = 200;
         }
-        return response()->txt('Auth: ' . $user_status, $status);
+        return response()->txt('Auth: ' . $userStatus, $status);
     }
 }

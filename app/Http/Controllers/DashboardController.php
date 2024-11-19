@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-
 class DashboardController extends Controller
 {
     /**
@@ -13,7 +11,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
         $data = [];
         if (session('gw_address') && session('gw_port') && session('token')) {
             $data['wifidog_uri'] = "http://" . session('gw_address')

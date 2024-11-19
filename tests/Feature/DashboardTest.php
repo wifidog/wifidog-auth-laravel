@@ -21,8 +21,8 @@ class DashboardTest extends TestCase
                 'gw_port' => '2060',
                 'token' => $token,
             ])->get('/dashboard');
-        $wifidog_uri = "http://192.168.199.1:2060/wifidog/auth?token=" . $token;
-        $response->assertStatus(200)->assertViewHas('wifidog_uri', $wifidog_uri);
+        $wifidogUri = "http://192.168.199.1:2060/wifidog/auth?token=" . $token;
+        $response->assertStatus(200)->assertViewHas('wifidog_uri', $wifidogUri);
         $response->assertSeeText('start internet');
     }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use App\Models\Gateway;
 use Validator;
 
@@ -26,27 +26,27 @@ class GatewayController extends Controller
             'sys_load' => 'required|numeric',
             'wifidog_uptime' => 'required|integer',
         ]);
-        $r = 'Error: params wrong';
+        $responseTxt = 'Error: params wrong';
         if ($validator->fails()) {
-            return response()->txt($r, 400);
+            return response()->txt($responseTxt, 400);
         }
         $input = $validator->getData();
         $input['id'] = $input['gw_id'];
         unset($input['gw_id']);
-        $status_code = 200;
+        $statusCode = 200;
         if (config('wifidog.allow_unknown_gateway')) {
             Gateway::updateOrCreate(['id' => $input['id']], $input);
-            $r = 'Pong';
-        } else {
-            $gw = Gateway::find($input['id']);
-            if (!empty($gw)) {
-                $gw->update($input);
-                $r = 'Pong';
-            } else {
-                $r = 'Error: not allow unknown gateway';
-                $status_code = 400;
-            }
+            $responseTxt = 'Pong';
+            return response()->txt($responseTxt, $statusCode);
         }
-        return response()->txt($r, $status_code);
+        $gateway = Gateway::find($input['id']);
+        if (!empty($gateway)) {
+            $gateway->update($input);
+            $responseTxt = 'Pong';
+            return response()->txt($responseTxt, $statusCode);
+        }
+        $responseTxt = 'Error: not allow unknown gateway';
+        $statusCode = 400;
+        return response()->txt($responseTxt, $statusCode);
     }
 }
