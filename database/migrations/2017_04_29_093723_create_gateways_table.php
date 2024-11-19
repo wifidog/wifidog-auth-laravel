@@ -4,14 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGatewaysTable extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('gateways', function (Blueprint $table) {
             $table->string('id', 32)->primary('id');
@@ -30,8 +29,8 @@ class CreateGatewaysTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('gateways');
     }
-}
+};
