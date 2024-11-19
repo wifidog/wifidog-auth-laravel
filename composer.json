@@ -13,7 +13,7 @@
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel-fans/docker": "^1.0",
-        "laravel-fans/lint": "^1.1",
+        "laravel-fans/lint": "^9.2",
         "laravel/breeze": "^2.2",
         "laravel/pail": "^1.1",
         "laravel/pint": "^1.13",

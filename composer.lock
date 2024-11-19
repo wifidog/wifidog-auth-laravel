@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "983fdef6d02ba305bc50b2561c6ff48a",
+    "content-hash": "938a58a39312e3c0a23b1a19a9870e8f",
     "packages": [
         {
             "name": "brick/math",
@@ -1056,16 +1056,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.31.0",
+            "version": "v11.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "365090ed2c68244e3141cdb5e247cdf3dfba2c40"
+                "reference": "bc2aad63f83ee5089be7b21cf29d645ccf31e927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/365090ed2c68244e3141cdb5e247cdf3dfba2c40",
-                "reference": "365090ed2c68244e3141cdb5e247cdf3dfba2c40",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/bc2aad63f83ee5089be7b21cf29d645ccf31e927",
+                "reference": "bc2aad63f83ee5089be7b21cf29d645ccf31e927",
                 "shasum": ""
             },
             "require": {
@@ -1261,7 +1261,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-11-12T15:36:15+00:00"
+            "time": "2024-11-15T17:04:33+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -6063,26 +6063,27 @@
         },
         {
             "name": "laravel-fans/lint",
-            "version": "1.1.0",
+            "version": "v9.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-fans/laravel-lint.git",
-                "reference": "5bbaf2d0310d4a65d0d9d0b5bae5dc8acc19ad37"
+                "reference": "150a6a8ed9629a46ef9588435a01b0dc6cd15a77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-fans/laravel-lint/zipball/5bbaf2d0310d4a65d0d9d0b5bae5dc8acc19ad37",
-                "reference": "5bbaf2d0310d4a65d0d9d0b5bae5dc8acc19ad37",
+                "url": "https://api.github.com/repos/laravel-fans/laravel-lint/zipball/150a6a8ed9629a46ef9588435a01b0dc6cd15a77",
+                "reference": "150a6a8ed9629a46ef9588435a01b0dc6cd15a77",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/support": ">=v6.20.36",
-                "phpmd/phpmd": "^2.10",
-                "squizlabs/php_codesniffer": "^3.5"
+                "illuminate/support": ">=v9",
+                "phpmd/phpmd": ">=2.10",
+                "squizlabs/php_codesniffer": ">=3.5"
             },
             "require-dev": {
-                "orchestra/testbench": ">=v4.8.0"
+                "orchestra/testbench": ">=v7",
+                "php-mock/php-mock": "^2.5"
             },
             "type": "library",
             "extra": {
@@ -6110,9 +6111,9 @@
             "description": "Laravel Lint Code Style",
             "support": {
                 "issues": "https://github.com/laravel-fans/laravel-lint/issues",
-                "source": "https://github.com/laravel-fans/laravel-lint/tree/1.1.0"
+                "source": "https://github.com/laravel-fans/laravel-lint/tree/v9.2.0"
             },
-            "time": "2022-11-21T04:30:52+00:00"
+            "time": "2024-11-19T02:06:59+00:00"
         },
         {
             "name": "laravel/breeze",

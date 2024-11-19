@@ -11,12 +11,6 @@
   <!-- Include the whole PSR12 standard -->
   <rule ref="PSR12"/>
 
-  <!-- ignore ERROR: Each class must be in a namespace of at least one level (a top-level vendor name) -->
-  <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-    <exclude-pattern>/database/migrations/</exclude-pattern>
-    <exclude-pattern>/database/seeds/</exclude-pattern>
-  </rule>
-
   <!-- ignore WARNING: No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them. -->
   <rule ref="Internal.NoCodeFound">
     <exclude-pattern>/resources/views/</exclude-pattern>
