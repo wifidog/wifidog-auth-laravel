@@ -46,7 +46,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       -
         name: Lint PHP
-        run: php artisan lint:code
+        run: php artisan lint
       -
         uses: hadolint/hadolint-action@v3.1.0
 
