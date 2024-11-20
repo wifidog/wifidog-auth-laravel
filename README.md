@@ -5,7 +5,7 @@
 [![Laravel 11](https://github.com/wifidog/wifidog-auth-laravel/actions/workflows/laravel-11.yml/badge.svg)](https://github.com/wifidog/wifidog-auth-laravel/actions/workflows/laravel-11.yml)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/wifidog/wifidog-auth-laravel/blob/master/LICENSE)
 
-This project provides a auth server for wifidog. For API details, please see the [WiFiDog Protocol V1](https://github.com/wifidog/wifidog-auth-laravel/wiki).
+This project provides a auth server for wifidog, following [WiFiDog Protocol V1](https://github.com/wifidog/wifidog-auth-laravel/wiki).
 
 ## Features
 
@@ -13,7 +13,7 @@ This project provides a auth server for wifidog. For API details, please see the
   - /login
   - /logout
   - /portal
-  - /messages OR gw\_message.php
+  - /messages
 - Apis
   - /ping
   - /auth
