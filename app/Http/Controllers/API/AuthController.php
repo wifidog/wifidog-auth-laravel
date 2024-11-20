@@ -32,7 +32,6 @@ class AuthController extends Controller
     public function index(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'gw_id' => 'required|string',
             'token' => 'required|string',
             'stage' => 'required|string|in:login,logout,counters',
             'incoming' => 'required_if:stage,counters|integer',

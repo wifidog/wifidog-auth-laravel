@@ -33,7 +33,6 @@ class AuthControllerTest extends TestCase
         $params = [
             'stage' => 'login',
             'token' => $this->grantToken(),
-            'gw_id' => 'D4EE073700C2',
         ];
         $response = $this->call('GET', '/auth', $params);
 
@@ -46,7 +45,6 @@ class AuthControllerTest extends TestCase
         $params = [
             'stage' => 'login',
             'token' => 'thisIsABadToken',
-            'gw_id' => 'D4EE073700C2',
         ];
         $response = $this->call('GET', '/auth', $params);
 
@@ -59,7 +57,6 @@ class AuthControllerTest extends TestCase
         $params = [
             'stage' => 'counters',
             'token' => $this->grantToken(),
-            'gw_id' => 'D4EE073700C2',
             'incoming' => rand(1, 999),
             'outgoing' => rand(1, 999),
             'ip' => fake()->ipv4(),
