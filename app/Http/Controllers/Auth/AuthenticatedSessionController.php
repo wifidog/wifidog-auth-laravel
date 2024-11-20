@@ -42,12 +42,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $uri = '/';
+        if (session('gw_address') && session('gw_port') && session('token')) {
+            $uri = 'http://' . session('gw_address') . ':' . session('gw_port') . '/wifidog/auth?logout=1&token='
+                . session('token');
+        }
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect($uri);
     }
 }

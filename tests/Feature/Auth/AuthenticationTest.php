@@ -52,6 +52,22 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect('/');
     }
 
+    public function testLogoutWithWifidog()
+    {
+        $user = User::factory()->create();
+        $token = $user->createToken('wifidog', ['internet:access'])->plainTextToken;
+        $gwAddress = fake()->ipv4;
+        $gwPort = fake()->numberBetween(1025, 9999);
+        $response = $this->actingAs($user)
+            ->withSession([
+                'gw_address' => $gwAddress,
+                'gw_port' => $gwPort,
+                'token' => $token,
+            ])->post('/logout');
+        $response->assertRedirect('http://' . $gwAddress . ':' . $gwPort . '/wifidog/auth?logout=1&token='
+            . $token);
+    }
+
     public function testUsersCanBeRedirectToWifidogGatewayAfterLogin(): void
     {
         $user = User::factory()->create();

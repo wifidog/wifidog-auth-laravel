@@ -24,8 +24,8 @@ class AuthController extends Controller
      * -1 - AUTH_ERROR - An error occurred during the validation process.
      *      Gateway will show error in this page(gateway/wifidog/auth?token=xxx), no redirect.
      *
-     * @example curl 'http://wifidog-auth.lan/auth/?stage=login&ip=192.168.199.123&mac=84:ef:18:ec:db:73&token=thisIsAToken&incoming=0&outgoing=0&gw_id=D4EE073700C2'
-     * @link http://dev.wifidog.org/wiki/doc/developer/WiFiDogProtocol_V1#Authserverauthenticationprotocol
+     * @example curl 'http://wifidog-auth.lan/auth/?stage=login&ip=192.168.199.123&mac=84:ef:18:ec:db:73&incoming=0&outgoing=0&token=thisIsAToken'
+     * @link https://github.com/wifidog/wifidog-auth-laravel/wiki#auth-server-authentication-protocol
      *
      * @return \Illuminate\Http\Response
      */
